@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Dalia ❤️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.6.0/confetti.browser.min.js"></script>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+        }
+        .font-handwriting {
+            font-family: 'Dancing Script', cursive;
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .heart-bg {
+            background-color: #fff0f3;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z' fill='%23ffccd5' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="heart-bg text-gray-800 overflow-x-hidden">
+
+    <!-- Floating Hearts Container -->
+    <div id="hearts-container" class="fixed inset-0 pointer-events-none z-0"></div>
+
+    <!-- Main Content -->
+    <main class="relative z-10 max-w-md mx-auto bg-white/90 backdrop-blur-sm min-h-screen shadow-2xl border-x border-pink-100">
+        
+        <!-- Hero Section -->
+        <header class="relative h-96 overflow-hidden rounded-b-[3rem] shadow-lg">
+            <div class="absolute inset-0 bg-gradient-to-b from-pink-400 to-rose-500 opacity-90"></div>
+            <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1000&auto=format&fit=crop" alt="Fondo Romántico" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-50">
+            
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-white text-center p-6">
+                <div class="animate-float mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white drop-shadow-lg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+                    </svg>
+                </div>
+                <h1 class="font-handwriting text-6xl mb-2 drop-shadow-md">Dalia</h1>
+                <p class="text-xl tracking-widest uppercase font-semibold opacity-90">Felices 3 Meses</p>
+                <p class="text-sm mt-2 opacity-80">Desde el 11 de agosto, 6:34 PM</p>
+            </div>
+        </header>
+
+        <!-- Counter Section -->
+        <section class="px-6 py-10 -mt-10">
+            <div class="bg-white rounded-2xl shadow-xl p-6 border border-pink-100 text-center transform hover:scale-105 transition-transform duration-300">
+                <h2 class="text-rose-500 font-bold text-lg mb-4 uppercase tracking-wide">Tiempo Juntos</h2>
+                <div class="grid grid-cols-4 gap-2 text-center">
+                    <div class="bg-rose-50 rounded-lg p-2">
+                        <span id="days" class="block text-2xl font-bold text-rose-600">0</span>
+                        <span class="text-xs text-rose-400">Días</span>
+                    </div>
+                    <div class="bg-rose-50 rounded-lg p-2">
+                        <span id="hours" class="block text-2xl font-bold text-rose-600">0</span>
+                        <span class="text-xs text-rose-400">Horas</span>
+                    </div>
+                    <div class="bg-rose-50 rounded-lg p-2">
+                        <span id="minutes" class="block text-2xl font-bold text-rose-600">0</span>
+                        <span class="text-xs text-rose-400">Min</span>
+                    </div>
+                    <div class="bg-rose-50 rounded-lg p-2">
+                        <span id="seconds" class="block text-2xl font-bold text-rose-600">0</span>
+                        <span class="text-xs text-rose-400">Seg</span>
+                    </div>
+                </div>
+                <p class="mt-4 text-sm text-gray-500 italic">...y cada segundo cuenta.</p>
+            </div>
+        </section>
+
+        <!-- Love Note -->
+        <section class="px-8 py-6">
+            <h2 class="font-handwriting text-4xl text-center text-rose-500 mb-6">Mi Carta Para Ti</h2>
+            <div class="prose prose-rose mx-auto text-center leading-relaxed text-gray-600">
+                <p class="mb-4">
+                    Mi hermosa Dalia,
+                </p>
+                <p class="mb-4">
+                    Hoy celebramos nuestros primeros 3 meses, pero siento que te conozco de toda la vida. Gracias por cada sonrisa, por cada momento compartido y por hacer mis días mucho más brillantes.
+                </p>
+                <p>
+                    Eres lo mejor que me ha pasado este 2025. Te quiero con todo mi corazón y no puedo esperar a ver todo lo que el futuro tiene preparado para nosotros.
+                </p>
+                <p class="mt-6 font-handwriting text-2xl text-rose-600">¡Te amo!</p>
+            </div>
+        </section>
+
+        <!-- Gallery Preview -->
+        <section class="px-4 py-8 bg-rose-50 my-6 rounded-3xl mx-4">
+            <h2 class="font-handwriting text-4xl text-center text-rose-500 mb-6">Nuestros Momentos</h2>
+            <div class="grid grid-cols-2 gap-3">
+                <!-- Photo 1 -->
+                <div class="relative h-40 rounded-xl overflow-hidden shadow-md group">
+                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&q=80&w=300&h=300" alt="Momento 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-2">
+                        <span class="text-white text-xs font-bold">Tú y Yo</span>
+                    </div>
+                </div>
+                <!-- Photo 2 -->
+                <div class="relative h-40 rounded-xl overflow-hidden shadow-md group">
+                    <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&q=80&w=300&h=300" alt="Momento 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                </div>
+                 <!-- Photo 3 -->
+                 <div class="relative h-40 rounded-xl overflow-hidden shadow-md group col-span-2">
+                    <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&q=80&w=600&h=300" alt="Momento 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+                        <span class="font-handwriting text-white text-3xl drop-shadow-lg">Juntos</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why I Love You List -->
+        <section class="px-8 py-8 mb-10">
+            <h3 class="text-center font-bold text-gray-400 text-sm tracking-widest uppercase mb-6">3 Razones (1 por cada mes)</h3>
+            <div class="space-y-4">
+                <div class="flex items-center bg-white p-4 rounded-xl shadow-sm border-l-4 border-rose-400">
+                    <span class="text-2xl mr-4">✨</span>
+                    <p class="text-sm text-gray-600">Por tu sonrisa que ilumina mis días más oscuros.</p>
+                </div>
+                <div class="flex items-center bg-white p-4 rounded-xl shadow-sm border-l-4 border-rose-400">
+                    <span class="text-2xl mr-4">🤝</span>
+                    <p class="text-sm text-gray-600">Por apoyarme y entenderme como nadie más.</p>
+                </div>
+                <div class="flex items-center bg-white p-4 rounded-xl shadow-sm border-l-4 border-rose-400">
+                    <span class="text-2xl mr-4">❤️</span>
+                    <p class="text-sm text-gray-600">Simplemente por ser tú, la más hermosa.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Button -->
+        <div class="text-center pb-12 px-6">
+            <button onclick="celebrate()" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-bold py-4 px-8 rounded-full shadow-lg transform transition duration-200 hover:-translate-y-1 active:scale-95 focus:outline-none ring-4 ring-rose-200">
+                🎁 Presiona para una sorpresa
+            </button>
+        </div>
+
+        <!-- Music Player UI (Visual Only) -->
+        <div class="fixed bottom-4 left-4 right-4 bg-white/90 backdrop-blur-md p-3 rounded-2xl shadow-2xl border border-gray-100 flex items-center z-50">
+            <div class="w-10 h-10 bg-rose-500 rounded-full flex items-center justify-center animate-spin-slow">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
+                </svg>
+            </div>
+            <div class="ml-3 flex-1">
+                <p class="text-xs font-bold text-gray-800">Nuestra Canción</p>
+                <p class="text-[10px] text-gray-500">Pensando en ti...</p>
+            </div>
+            <div class="flex space-x-2 text-rose-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // --- Configuration ---
+        // Date: August 11, 2025 at 18:34 (6:34 PM)
+        const startDate = new Date('2025-08-11T18:34:00');
+
+        // --- Timer Logic ---
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
+
+            if (diff < 0) {
+                // Should not happen given the current date, but safety check
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            document.getElementById('days').innerText = days;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('minutes').innerText = minutes;
+            document.getElementById('seconds').innerText = seconds;
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer(); // Run immediately
+
+        // --- Celebration Effect (Confetti) ---
+        function celebrate() {
+            const duration = 3 * 1000;
+            const animationEnd = Date.now() + duration;
+            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 50 };
+
+            function random(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                const particleCount = 50 * (timeLeft / duration);
+                
+                // Create heart shaped confetti
+                confetti({
+                    ...defaults,
+                    particleCount,
+                    origin: { x: random(0.1, 0.3), y: Math.random() - 0.2 },
+                    colors: ['#FFC0CB', '#FF69B4', '#FF1493'],
+                    shapes: ['heart'] 
+                });
+                confetti({
+                    ...defaults,
+                    particleCount,
+                    origin: { x: random(0.7, 0.9), y: Math.random() - 0.2 },
+                    colors: ['#FFC0CB', '#FF69B4', '#FF1493'],
+                    shapes: ['heart']
+                });
+            }, 250);
+        }
+
+        // --- Background Floating Hearts ---
+        function createFloatingHearts() {
+            const container = document.getElementById('hearts-container');
+            const heartCount = 15; 
+
+            for(let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.style.position = 'absolute';
+                heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.opacity = Math.random() * 0.5;
+                heart.style.animation = `float ${Math.random() * 5 + 5}s ease-in-out infinite`;
+                heart.style.animationDelay = `${Math.random() * 5}s`;
+                container.appendChild(heart);
+            }
+        }
+
+        createFloatingHearts();
+
+    </script>
+    <style>
+        .animate-spin-slow {
+            animation: spin 8s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</body>
+</html>
