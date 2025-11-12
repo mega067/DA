@@ -6,7 +6,8 @@
     <title>Para Dalia ❤️</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.6.0/confetti.browser.min.js"></script>
+    <!-- Nota: El script de confetti ya no es necesario si quitamos el botón de sorpresa -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.6.0/confetti.browser.min.js"></script> -->
     <style>
         body {
             font-family: 'Nunito', sans-serif;
@@ -44,7 +45,8 @@
         <!-- Encabezado -->
         <header class="relative h-96 overflow-hidden rounded-b-[3rem] shadow-lg">
             <div class="absolute inset-0 bg-gradient-to-b from-pink-400 to-rose-500 opacity-90"></div>
-            <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-50">
+            <!-- Puedes cambiar esta imagen de fondo también -->
+            <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1000&auto=format&fit=crop" alt="Fondo romántico" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-50">
             <div class="absolute inset-0 flex flex-col items-center justify-center text-white text-center p-6">
                 <div class="animate-float mb-4">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white drop-shadow-lg" viewBox="0 0 24 24" fill="currentColor">
@@ -94,32 +96,57 @@
             </div>
         </section>
 
-        <!-- Botón sorpresa -->
-        
-        
+        <!-- Sección de Foto Única -->
+        <!-- Agregado padding-bottom (pb-32) para que no lo tape el reproductor -->
+        <section class="px-4 py-8 my-6 mx-4 pb-32"> 
+            <h2 class="font-handwriting text-4xl text-center text-rose-500 mb-6">Un Momento Especial</h2>
+            <div class="relative rounded-2xl overflow-hidden shadow-lg group">
+                <!-- 
+                  AQUÍ VA TU FOTO
+                  CAMBIA ESTA FOTO: Reemplaza la URL de placehold.co con la URL de tu foto
+                -->
+                <img src="ANIMATION.gif" alt="Momento Especial" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400/fecdd3/db2777?text=Error+Cargando'">
+                
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end justify-center pb-6">
+                    <span class="font-handwriting text-white text-3xl drop-shadow-lg">¡Tú y Yo!</span>
+                </div>
+            </div>
+        </section>
 
+        
         <!-- Reproductor con botón Play/Pause -->
         <div class="fixed bottom-4 left-4 right-4 bg-white/90 backdrop-blur-md p-3 rounded-2xl shadow-2xl border border-gray-100 flex items-center justify-between z-50">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 bg-rose-500 rounded-full flex items-center justify-center">
+                <div class="w-10 h-10 bg-rose-500 rounded-full flex items-center justify-center animate-spin-slow">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
                     </svg>
                 </div>
                 <div>
-                    <p class="text-xs font-bold text-gray-800">Nuestra Canción</p>
-                    <p class="text-[10px] text-gray-500">Pensando en ti...</p>
+                    <!-- Puedes cambiar el título de la canción aquí -->
+                    <p class="text-xs font-bold text-gray-800">Me niegas</p>
+                    <p class="text-[10px] text-gray-500">Nuestra Canción ❤️</p>
                 </div>
             </div>
 
             <!-- Botón de play/pause -->
-            <button id="playBtn" onclick="toggleMusic()" class="bg-rose-500 hover:bg-rose-600 text-white rounded-full p-2 shadow-md">
-                ▶️
+            <button id="playBtn" onclick="toggleMusic()" class="bg-rose-500 hover:bg-rose-600 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-md">
+                <!-- El ícono se cambiará por JS -->
+                <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                </svg>
+                <svg id="pauseIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h1a1 1 0 001-1V8a1 1 0 00-1-1H8zm5 0a1 1 0 00-1 1v4a1 1 0 001 1h1a1 1 0 001-1V8a1 1 0 00-1-1h-1z" clip-rule="evenodd" />
+                </svg>
             </button>
         </div>
 
         <!-- Audio -->
-        <audio id="loveSong">
+        <audio id="loveSong" loop>
+            <!-- 
+              AQUÍ VA TU MÚSICA
+              REEMPLAZA ESTO con la URL de tu canción 
+            -->
             <source src="cancion.mp3" type="audio/mpeg">
             Tu navegador no soporta el audio en HTML5.
         </audio>
@@ -127,50 +154,34 @@
     </main>
 
     <script>
+        // --- Configuración del Temporizador ---
         const startDate = new Date('2025-08-11T18:34:00');
+        
         function updateTimer() {
             const now = new Date();
             const diff = now - startDate;
+
+            if (diff < 0) return; // Si la fecha es futura
+
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
             const minutes = Math.floor((diff / (1000 * 60)) % 60);
             const seconds = Math.floor((diff / 1000) % 60);
+            
             document.getElementById('days').innerText = days;
             document.getElementById('hours').innerText = hours;
             document.getElementById('minutes').innerText = minutes;
             document.getElementById('seconds').innerText = seconds;
         }
         setInterval(updateTimer, 1000);
-        updateTimer();
+        updateTimer(); // Llamada inicial
 
-        function celebrate() {
-            const duration = 3 * 1000;
-            const animationEnd = Date.now() + duration;
-            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 50 };
-            function random(min, max) { return Math.random() * (max - min) + min; }
-            const interval = setInterval(function() {
-                const timeLeft = animationEnd - Date.now();
-                if (timeLeft <= 0) return clearInterval(interval);
-                const particleCount = 50 * (timeLeft / duration);
-                confetti({
-                    ...defaults,
-                    particleCount,
-                    origin: { x: random(0.1, 0.3), y: Math.random() - 0.2 },
-                    colors: ['#FFC0CB', '#FF69B4', '#FF1493'],
-                    shapes: ['heart']
-                });
-                confetti({
-                    ...defaults,
-                    particleCount,
-                    origin: { x: random(0.7, 0.9), y: Math.random() - 0.2 },
-                    colors: ['#FFC0CB', '#FF69B4', '#FF1493'],
-                    shapes: ['heart']
-                });
-            }, 250);
-        }
 
+        // --- Corazones Flotantes ---
         function createFloatingHearts() {
             const container = document.getElementById('hearts-container');
+            if (!container) return;
+            
             const heartCount = 15;
             for(let i = 0; i < heartCount; i++) {
                 const heart = document.createElement('div');
@@ -187,21 +198,43 @@
         }
         createFloatingHearts();
 
-        // 🎵 Control del audio
+        // --- Control del Audio ---
         const song = document.getElementById('loveSong');
         const playBtn = document.getElementById('playBtn');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
         let isPlaying = false;
 
         function toggleMusic() {
-            if (!isPlaying) {
-                song.play();
-                playBtn.textContent = '⏸️';
-            } else {
-                song.pause();
-                playBtn.textContent = '▶️';
+            if (typeof song.play !== 'function') {
+                console.error('El elemento de audio no está listo.');
+                return;
             }
-            isPlaying = !isPlaying;
+
+            if (!isPlaying) {
+                // Intenta reproducir
+                song.play().then(() => {
+                    // Éxito
+                    playIcon.classList.add('hidden');
+                    pauseIcon.classList.remove('hidden');
+                    isPlaying = true;
+                }).catch(error => {
+                    // Fallo (navegador bloquea autoplay)
+                    console.warn('La reproducción automática fue bloqueada. El usuario debe interactuar primero.');
+                });
+            } else {
+                // Pausa
+                song.pause();
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+                isPlaying = false;
+            }
         }
+
+        // Intento de reproducir al cargar la página (puede ser bloqueado)
+        // Se recomienda que el usuario haga el primer clic
+        // toggleMusic(); 
+
     </script>
 </body>
 </html>
