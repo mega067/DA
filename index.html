@@ -26,9 +26,7 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        .font-script {
-            font-family: 'Great Vibes', cursive;
-        }
+        .font-script { font-family: 'Great Vibes', cursive; }
 
         /* Fondo animado suave */
         .bg-animated {
@@ -57,45 +55,38 @@
             50% { transform: translateY(-10px); }
         }
 
-        /* Estilo para el disco de música */
+        /* Disco de música */
         .spin-slow { animation: spin 8s linear infinite; }
         .paused { animation-play-state: paused; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* Click effect para el juego */
+        /* Click effect */
         .click-bounce:active { transform: scale(0.95); }
     </style>
 </head>
 <body class="bg-animated text-gray-700 pb-32">
 
-    <!-- Header con Foto Principal -->
+    <!-- Header -->
     <header class="relative h-[60vh] w-full overflow-hidden rounded-b-[40px] shadow-2xl">
         <div class="absolute inset-0 bg-gradient-to-t from-rose-900/60 to-transparent z-10"></div>
+        <!-- La imagen se carga desde la configuración -->
+        <img id="img-portada" src="" class="w-full h-full object-cover" alt="Nosotros">
         
-        <!-- FOTO PRINCIPAL -->
-        <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?q=80&w=800&auto=format&fit=crop" 
-             class="w-full h-full object-cover" 
-             alt="Nosotros">
-
         <div class="absolute inset-0 z-20 flex flex-col justify-end items-center pb-12 text-white">
             <h1 class="font-script text-7xl drop-shadow-lg mb-2 text-pink-200">Dalia</h1>
-            
-            <!-- Título Dinámico (Se actualiza solo) -->
             <p id="header-title" class="uppercase tracking-[0.2em] text-sm font-bold bg-white/20 backdrop-blur-md px-6 py-2 rounded-full border border-white/30 shadow-lg animate-float">
-                Cargando tiempo...
+                Cargando...
             </p>
         </div>
     </header>
 
-    <!-- Contenedor Principal -->
     <main class="max-w-md mx-auto px-4 -mt-8 relative z-30 space-y-6">
 
-        <!-- SECCIÓN 1: CONTADOR DETALLADO (Glass Card) -->
+        <!-- Contador Detallado -->
         <section class="glass rounded-3xl p-6 shadow-xl text-center animate-float" style="animation-delay: 1s;">
             <h2 class="text-rose-500 font-bold text-sm tracking-widest uppercase mb-4 flex justify-center items-center gap-2">
                 <i class="ph-fill ph-heart text-xl"></i> Tiempo Exacto
             </h2>
-            
             <div class="grid grid-cols-4 gap-2 mb-4">
                 <div class="flex flex-col bg-white/50 rounded-xl p-2">
                     <span id="c-years" class="text-xl font-black text-rose-600">0</span>
@@ -116,7 +107,7 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 2: CONTADOR ACUMULADO -->
+        <!-- Contador Acumulado -->
         <section class="bg-white rounded-3xl p-5 shadow-lg border border-pink-100">
             <h3 class="text-center text-gray-400 text-xs uppercase font-bold mb-3">Contador Total Acumulado</h3>
             <div class="grid grid-cols-4 gap-1 text-center divide-x divide-pink-100">
@@ -139,52 +130,49 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 3: MINI JUEGO "BATALLA DE AMOR" -->
+        <!-- Mini Juego -->
         <section class="relative overflow-hidden rounded-3xl shadow-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-white p-6">
             <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-            
             <h2 class="relative z-10 text-center font-script text-4xl mb-1">¿Quién ama más?</h2>
             <p class="relative z-10 text-center text-xs opacity-90 mb-6">Toca tu botón (Los puntos se guardan)</p>
 
             <div class="relative z-10 flex justify-between items-end gap-4">
-                <!-- ÁNGEL -->
+                <!-- Ángel -->
                 <div class="flex flex-col items-center w-1/2">
                     <div class="text-3xl font-black mb-2 drop-shadow-md" id="score-angel">0</div>
                     <button onclick="addPoint('angel')" class="click-bounce w-full bg-blue-600 hover:bg-blue-500 border-b-4 border-blue-800 active:border-b-0 active:translate-y-1 text-white font-bold py-3 rounded-2xl shadow-lg transition-all flex flex-col items-center gap-1">
                         <i class="ph-fill ph-boy text-2xl"></i>
-                        <span>Ángel</span>
+                        <span id="name-p1">Ángel</span>
                     </button>
                 </div>
-                <!-- VS -->
                 <div class="mb-6 font-black text-2xl italic opacity-50">VS</div>
-                <!-- DALIA -->
+                <!-- Dalia -->
                 <div class="flex flex-col items-center w-1/2">
                     <div class="text-3xl font-black mb-2 drop-shadow-md" id="score-dalia">0</div>
                     <button onclick="addPoint('dalia')" class="click-bounce w-full bg-pink-500 hover:bg-pink-400 border-b-4 border-pink-700 active:border-b-0 active:translate-y-1 text-white font-bold py-3 rounded-2xl shadow-lg transition-all flex flex-col items-center gap-1">
                         <i class="ph-fill ph-girl text-2xl"></i>
-                        <span>Dalia</span>
+                        <span id="name-p2">Dalia</span>
                     </button>
                 </div>
             </div>
-            
-            <!-- Barra -->
             <div class="mt-6 w-full h-3 bg-black/20 rounded-full overflow-hidden relative z-10">
                 <div id="love-bar" class="h-full bg-white transition-all duration-500" style="width: 50%"></div>
             </div>
         </section>
 
-        <!-- Galería Deslizable -->
+        <!-- Galería -->
         <section class="pt-4">
             <h2 class="font-script text-3xl text-rose-500 text-center mb-4">Nuestros Recuerdos</h2>
             <div class="flex overflow-x-auto gap-4 pb-6 px-2 snap-x snap-mandatory" style="scrollbar-width: none;">
+                <!-- Las imágenes se cargan desde JS -->
                 <div class="snap-center shrink-0 w-60 h-80 rounded-2xl overflow-hidden shadow-md relative">
-                    <img src="ANIMATION.gif" class="w-full h-full object-cover">
+                    <img id="img-galeria-1" src="" class="w-full h-full object-cover">
                 </div>
                 <div class="snap-center shrink-0 w-60 h-80 rounded-2xl overflow-hidden shadow-md relative">
-                    <img src="https://images.unsplash.com/photo-1621621667797-e06afc217fb0?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover">
+                    <img id="img-galeria-2" src="" class="w-full h-full object-cover">
                 </div>
                 <div class="snap-center shrink-0 w-60 h-80 rounded-2xl overflow-hidden shadow-md relative">
-                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover">
+                    <img id="img-galeria-3" src="" class="w-full h-full object-cover">
                 </div>
             </div>
         </section>
@@ -196,7 +184,6 @@
                 <p class="text-gray-600 italic leading-relaxed text-sm">
                     "Cada día que pasa mi contador suma segundos, pero mi corazón suma motivos para amarte. Eres lo mejor que me ha pasado."
                 </p>
-                <!-- Mensaje Dinámico de Carta -->
                 <p id="letter-title" class="font-script text-2xl text-rose-600 mt-4 font-bold">
                     ¡Felices Meses!
                 </p>
@@ -206,14 +193,12 @@
 
     </main>
 
-    <!-- REPRODUCTOR -->
+    <!-- Reproductor -->
     <div class="fixed bottom-4 left-4 right-4 z-50">
         <div class="bg-white/90 backdrop-blur-md border border-pink-200 rounded-2xl p-3 shadow-2xl flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-rose-400 relative">
-                    <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=200&auto=format&fit=crop" 
-                         id="disk" 
-                         class="w-full h-full object-cover paused spin-slow">
+                    <img id="img-disco" src="" class="w-full h-full object-cover paused spin-slow">
                     <div class="absolute inset-0 flex items-center justify-center">
                         <div class="w-2 h-2 bg-white rounded-full"></div>
                     </div>
@@ -230,34 +215,86 @@
         </div>
     </div>
 
-    <!-- AUDIO -->
+    <!-- Audio -->
     <audio id="audio" loop>
-        <source src="cancion.mp3" type="audio/mpeg">
+        <source id="audio-source" src="" type="audio/mpeg">
     </audio>
 
     <script>
-        // --- CONFIGURACIÓN DE FECHA ---
-        // 11 Agosto 2025
-        const startDate = new Date(2025, 7, 11, 18, 34); 
+        // ==========================================
+        //  🛠️ CONFIGURACIÓN (EDITA AQUÍ) 🛠️
+        // ==========================================
+        const config = {
+            // Fecha de Inicio: Año, Mes (Enero=0, Agosto=7), Día, Hora, Minutos
+            fechaInicio: new Date(2025, 7, 11, 18, 34), 
+            
+            nombres: {
+                el: "Ángel",
+                ella: "Dalia"
+            },
 
-        // --- 1. LÓGICA DE TEXTO DINÁMICO (NUEVO) ---
+            fotos: {
+                // Foto grande de arriba
+                portada: "https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?q=80&w=800&auto=format&fit=crop",
+                
+                // Foto pequeña del reproductor de música
+                discoMusica: "https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=200&auto=format&fit=crop",
+                
+                // Las 3 fotos de la galería deslizable
+                galeria: [
+                    "https://images.unsplash.com/photo-1616091093729-c046294eb82e?q=80&w=600&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1621621667797-e06afc217fb0?q=80&w=600&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=600&auto=format&fit=crop"
+                ]
+            },
+
+            // Enlace a tu canción (debe ser .mp3)
+            musica: "cancion.mp3"
+        };
+        // ==========================================
+        //  FIN DE LA CONFIGURACIÓN (NO TOCAR ABAJO)
+        // ==========================================
+
+
+        // --- CARGAR DATOS AL INICIAR ---
+        function cargarConfiguracion() {
+            // Cargar Fotos
+            document.getElementById('img-portada').src = config.fotos.portada;
+            document.getElementById('img-disco').src = config.fotos.discoMusica;
+            document.getElementById('img-galeria-1').src = config.fotos.galeria[0];
+            document.getElementById('img-galeria-2').src = config.fotos.galeria[1];
+            document.getElementById('img-galeria-3').src = config.fotos.galeria[2];
+            
+            // Cargar Nombres en Juego
+            document.getElementById('name-p1').innerText = config.nombres.el;
+            document.getElementById('name-p2').innerText = config.nombres.ella;
+
+            // Cargar Música
+            document.getElementById('audio-source').src = config.musica;
+            document.getElementById('audio').load(); // Recargar audio con nueva fuente
+        }
+        cargarConfiguracion(); // Ejecutar carga
+
+
+        // --- LÓGICA DE TEXTO DE MESES (AUTOMÁTICA) ---
         function updateAnniversaryText() {
             const now = new Date();
+            const startDate = config.fechaInicio;
+
             // Calcular diferencia total en meses
             let months = (now.getFullYear() - startDate.getFullYear()) * 12 + (now.getMonth() - startDate.getMonth());
             
-            // Si aún no hemos llegado al día del mes (11), restamos un mes
+            // Si aún no es el día del mes, restar 1
             if (now.getDate() < startDate.getDate()) {
                 months--;
             }
 
-            // Textos a mostrar
             const headerTitle = document.getElementById('header-title');
             const letterTitle = document.getElementById('letter-title');
             
             let message = `Felices ${months} Meses`;
             
-            // Si es exactamente el día de aniversario (el 11 de cualquier mes)
+            // Mensaje especial si es el día exacto
             if (now.getDate() === startDate.getDate()) {
                 message = "¡Feliz Aniversario Amor!";
             }
@@ -266,10 +303,12 @@
             letterTitle.innerText = `¡${message}!`;
         }
 
-        // --- 2. CONTADORES (EXISTENTE) ---
+        // --- CONTADORES ---
         function updateCounters() {
             const now = new Date();
+            const startDate = config.fechaInicio;
             const diff = now - startDate;
+            
             if (diff < 0) return;
 
             // Detallado
@@ -306,7 +345,7 @@
             document.getElementById('t-seconds').innerText = dispSeconds < 10 ? '0'+dispSeconds : dispSeconds;
         }
 
-        // --- 3. JUEGO ---
+        // --- JUEGO ---
         let scoreAngel = parseInt(localStorage.getItem('scoreAngel')) || 0;
         let scoreDalia = parseInt(localStorage.getItem('scoreDalia')) || 0;
         const uiAngel = document.getElementById('score-angel');
@@ -338,9 +377,9 @@
             updateGameUI();
         }
 
-        // --- 4. MÚSICA ---
+        // --- MÚSICA ---
         const audio = document.getElementById('audio');
-        const disk = document.getElementById('disk');
+        const disk = document.getElementById('img-disco'); // Usar ID correcto
         const playIcon = document.getElementById('play-icon');
         const pauseIcon = document.getElementById('pause-icon');
         let isPlaying = false;
@@ -360,10 +399,10 @@
             isPlaying = !isPlaying;
         }
 
-        // --- INICIALIZACIÓN ---
+        // --- LOOP PRINCIPAL ---
         setInterval(updateCounters, 1000);
         updateCounters();
-        updateAnniversaryText(); // Se llama una vez al cargar
+        updateAnniversaryText();
         updateGameUI();
 
     </script>
