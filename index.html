@@ -18,17 +18,14 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
-        /* --- Estilos Globales y Animaciones --- */
+        /* --- Estilos Globales --- */
         body {
             font-family: 'Nunito', sans-serif;
             background-color: #ffe4e6;
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
         }
-
         .font-script { font-family: 'Great Vibes', cursive; }
-
-        /* Fondo animado suave */
         .bg-animated {
             background: linear-gradient(-45deg, #fff0f5, #ffe4e6, #fce7f3, #fff1f2);
             background-size: 400% 400%;
@@ -39,28 +36,20 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
-        /* Efecto Vidrio (Glassmorphism) */
         .glass {
             background: rgba(255, 255, 255, 0.65);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.6);
         }
-
-        /* Animaciones */
         .animate-float { animation: float 6s ease-in-out infinite; }
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
-
-        /* Disco de música */
         .spin-slow { animation: spin 8s linear infinite; }
         .paused { animation-play-state: paused; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
-
-        /* Click effect */
         .click-bounce:active { transform: scale(0.95); }
     </style>
 </head>
@@ -69,9 +58,7 @@
     <!-- Header -->
     <header class="relative h-[60vh] w-full overflow-hidden rounded-b-[40px] shadow-2xl">
         <div class="absolute inset-0 bg-gradient-to-t from-rose-900/60 to-transparent z-10"></div>
-        <!-- La imagen se carga desde la configuración -->
         <img id="img-portada" src="" class="w-full h-full object-cover" alt="Nosotros">
-        
         <div class="absolute inset-0 z-20 flex flex-col justify-end items-center pb-12 text-white">
             <h1 class="font-script text-7xl drop-shadow-lg mb-2 text-pink-200">Dalia</h1>
             <p id="header-title" class="uppercase tracking-[0.2em] text-sm font-bold bg-white/20 backdrop-blur-md px-6 py-2 rounded-full border border-white/30 shadow-lg animate-float">
@@ -81,29 +68,16 @@
     </header>
 
     <main class="max-w-md mx-auto px-4 -mt-8 relative z-30 space-y-6">
-
         <!-- Contador Detallado -->
         <section class="glass rounded-3xl p-6 shadow-xl text-center animate-float" style="animation-delay: 1s;">
             <h2 class="text-rose-500 font-bold text-sm tracking-widest uppercase mb-4 flex justify-center items-center gap-2">
                 <i class="ph-fill ph-heart text-xl"></i> Tiempo Exacto
             </h2>
             <div class="grid grid-cols-4 gap-2 mb-4">
-                <div class="flex flex-col bg-white/50 rounded-xl p-2">
-                    <span id="c-years" class="text-xl font-black text-rose-600">0</span>
-                    <span class="text-[10px] text-gray-500 uppercase">Años</span>
-                </div>
-                <div class="flex flex-col bg-white/50 rounded-xl p-2">
-                    <span id="c-months" class="text-xl font-black text-rose-600">0</span>
-                    <span class="text-[10px] text-gray-500 uppercase">Meses</span>
-                </div>
-                <div class="flex flex-col bg-white/50 rounded-xl p-2">
-                    <span id="c-weeks" class="text-xl font-black text-rose-600">0</span>
-                    <span class="text-[10px] text-gray-500 uppercase">Sem.</span>
-                </div>
-                <div class="flex flex-col bg-white/50 rounded-xl p-2">
-                    <span id="c-days" class="text-xl font-black text-rose-600">0</span>
-                    <span class="text-[10px] text-gray-500 uppercase">Días</span>
-                </div>
+                <div class="flex flex-col bg-white/50 rounded-xl p-2"><span id="c-years" class="text-xl font-black text-rose-600">0</span><span class="text-[10px] text-gray-500 uppercase">Años</span></div>
+                <div class="flex flex-col bg-white/50 rounded-xl p-2"><span id="c-months" class="text-xl font-black text-rose-600">0</span><span class="text-[10px] text-gray-500 uppercase">Meses</span></div>
+                <div class="flex flex-col bg-white/50 rounded-xl p-2"><span id="c-weeks" class="text-xl font-black text-rose-600">0</span><span class="text-[10px] text-gray-500 uppercase">Sem.</span></div>
+                <div class="flex flex-col bg-white/50 rounded-xl p-2"><span id="c-days" class="text-xl font-black text-rose-600">0</span><span class="text-[10px] text-gray-500 uppercase">Días</span></div>
             </div>
         </section>
 
@@ -111,36 +85,30 @@
         <section class="bg-white rounded-3xl p-5 shadow-lg border border-pink-100">
             <h3 class="text-center text-gray-400 text-xs uppercase font-bold mb-3">Contador Total Acumulado</h3>
             <div class="grid grid-cols-4 gap-1 text-center divide-x divide-pink-100">
-                <div>
-                    <span id="t-days" class="block text-lg font-bold text-gray-700">0</span>
-                    <span class="text-[9px] text-rose-400">Días Totales</span>
-                </div>
-                <div>
-                    <span id="t-hours" class="block text-lg font-bold text-gray-700">0</span>
-                    <span class="text-[9px] text-rose-400">Horas</span>
-                </div>
-                <div>
-                    <span id="t-minutes" class="block text-lg font-bold text-gray-700">0</span>
-                    <span class="text-[9px] text-rose-400">Minutos</span>
-                </div>
-                <div>
-                    <span id="t-seconds" class="block text-lg font-bold text-gray-700">0</span>
-                    <span class="text-[9px] text-rose-400">Segundos</span>
-                </div>
+                <div><span id="t-days" class="block text-lg font-bold text-gray-700">0</span><span class="text-[9px] text-rose-400">Días Totales</span></div>
+                <div><span id="t-hours" class="block text-lg font-bold text-gray-700">0</span><span class="text-[9px] text-rose-400">Horas</span></div>
+                <div><span id="t-minutes" class="block text-lg font-bold text-gray-700">0</span><span class="text-[9px] text-rose-400">Minutos</span></div>
+                <div><span id="t-seconds" class="block text-lg font-bold text-gray-700">0</span><span class="text-[9px] text-rose-400">Segundos</span></div>
             </div>
         </section>
 
-        <!-- Mini Juego -->
+        <!-- Mini Juego ONLINE -->
         <section class="relative overflow-hidden rounded-3xl shadow-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-white p-6">
             <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-            <h2 class="relative z-10 text-center font-script text-4xl mb-1">¿Quién ama más?</h2>
-            <p class="relative z-10 text-center text-xs opacity-90 mb-6">Toca tu botón (Los puntos se guardan)</p>
+            
+            <div class="relative z-10 flex justify-center items-center gap-2 mb-2">
+                <h2 class="text-center font-script text-4xl">Batalla de Amor</h2>
+                <!-- Indicador de estado -->
+                <div id="status-indicator" class="w-3 h-3 rounded-full bg-red-500 animate-pulse" title="Desconectado"></div>
+            </div>
+            
+            <p class="relative z-10 text-center text-xs opacity-90 mb-6">Toca tu botón (¡Ahora sí se sincroniza en ambos celulares!)</p>
 
             <div class="relative z-10 flex justify-between items-end gap-4">
                 <!-- Ángel -->
                 <div class="flex flex-col items-center w-1/2">
                     <div class="text-3xl font-black mb-2 drop-shadow-md" id="score-angel">0</div>
-                    <button onclick="addPoint('angel')" class="click-bounce w-full bg-blue-600 hover:bg-blue-500 border-b-4 border-blue-800 active:border-b-0 active:translate-y-1 text-white font-bold py-3 rounded-2xl shadow-lg transition-all flex flex-col items-center gap-1">
+                    <button id="btn-angel" class="click-bounce w-full bg-blue-600 hover:bg-blue-500 border-b-4 border-blue-800 active:border-b-0 active:translate-y-1 text-white font-bold py-3 rounded-2xl shadow-lg transition-all flex flex-col items-center gap-1">
                         <i class="ph-fill ph-boy text-2xl"></i>
                         <span id="name-p1">Ángel</span>
                     </button>
@@ -149,7 +117,7 @@
                 <!-- Dalia -->
                 <div class="flex flex-col items-center w-1/2">
                     <div class="text-3xl font-black mb-2 drop-shadow-md" id="score-dalia">0</div>
-                    <button onclick="addPoint('dalia')" class="click-bounce w-full bg-pink-500 hover:bg-pink-400 border-b-4 border-pink-700 active:border-b-0 active:translate-y-1 text-white font-bold py-3 rounded-2xl shadow-lg transition-all flex flex-col items-center gap-1">
+                    <button id="btn-dalia" class="click-bounce w-full bg-pink-500 hover:bg-pink-400 border-b-4 border-pink-700 active:border-b-0 active:translate-y-1 text-white font-bold py-3 rounded-2xl shadow-lg transition-all flex flex-col items-center gap-1">
                         <i class="ph-fill ph-girl text-2xl"></i>
                         <span id="name-p2">Dalia</span>
                     </button>
@@ -164,16 +132,9 @@
         <section class="pt-4">
             <h2 class="font-script text-3xl text-rose-500 text-center mb-4">Nuestros Recuerdos</h2>
             <div class="flex overflow-x-auto gap-4 pb-6 px-2 snap-x snap-mandatory" style="scrollbar-width: none;">
-                <!-- Las imágenes se cargan desde JS -->
-                <div class="snap-center shrink-0 w-60 h-80 rounded-2xl overflow-hidden shadow-md relative">
-                    <img id="img-galeria-1" src="" class="w-full h-full object-cover">
-                </div>
-                <div class="snap-center shrink-0 w-60 h-80 rounded-2xl overflow-hidden shadow-md relative">
-                    <img id="img-galeria-2" src="" class="w-full h-full object-cover">
-                </div>
-                <div class="snap-center shrink-0 w-60 h-80 rounded-2xl overflow-hidden shadow-md relative">
-                    <img id="img-galeria-3" src="" class="w-full h-full object-cover">
-                </div>
+                <div class="snap-center shrink-0 w-60 h-80 rounded-2xl overflow-hidden shadow-md relative"><img id="img-galeria-1" src="" class="w-full h-full object-cover"></div>
+                <div class="snap-center shrink-0 w-60 h-80 rounded-2xl overflow-hidden shadow-md relative"><img id="img-galeria-2" src="" class="w-full h-full object-cover"></div>
+                <div class="snap-center shrink-0 w-60 h-80 rounded-2xl overflow-hidden shadow-md relative"><img id="img-galeria-3" src="" class="w-full h-full object-cover"></div>
             </div>
         </section>
 
@@ -181,16 +142,11 @@
         <article class="glass p-6 rounded-2xl shadow-sm border border-rose-100 mb-10">
             <div class="text-center">
                 <i class="ph-fill ph-envelope-open text-3xl text-rose-400 mb-2"></i>
-                <p class="text-gray-600 italic leading-relaxed text-sm">
-                    "Cada día que pasa mi contador suma segundos, pero mi corazón suma motivos para amarte. Eres lo mejor que me ha pasado."
-                </p>
-                <p id="letter-title" class="font-script text-2xl text-rose-600 mt-4 font-bold">
-                    ¡Felices Meses!
-                </p>
+                <p class="text-gray-600 italic leading-relaxed text-sm">"Cada día que pasa mi contador suma segundos, pero mi corazón suma motivos para amarte. Eres lo mejor que me ha pasado."</p>
+                <p id="letter-title" class="font-script text-2xl text-rose-600 mt-4 font-bold">¡Felices Meses!</p>
                 <p class="text-sm text-gray-400 mt-2 text-right">- Ángel</p>
             </div>
         </article>
-
     </main>
 
     <!-- Reproductor -->
@@ -199,14 +155,9 @@
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-rose-400 relative">
                     <img id="img-disco" src="" class="w-full h-full object-cover paused spin-slow">
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="w-2 h-2 bg-white rounded-full"></div>
-                    </div>
+                    <div class="absolute inset-0 flex items-center justify-center"><div class="w-2 h-2 bg-white rounded-full"></div></div>
                 </div>
-                <div>
-                    <p class="text-xs font-bold text-gray-800">Nuestra Canción</p>
-                    <p class="text-[10px] text-rose-500">Play para escuchar ❤️</p>
-                </div>
+                <div><p class="text-xs font-bold text-gray-800">Nuestra Canción</p><p class="text-[10px] text-rose-500">Play para escuchar ❤️</p></div>
             </div>
             <button onclick="toggleMusic()" class="w-10 h-10 bg-rose-500 rounded-full flex items-center justify-center text-white shadow-lg active:scale-90 transition-transform">
                 <i id="play-icon" class="ph-fill ph-play"></i>
@@ -214,125 +165,163 @@
             </button>
         </div>
     </div>
+    <audio id="audio" loop><source id="audio-source" src="" type="audio/mpeg"></audio>
 
-    <!-- Audio -->
-    <audio id="audio" loop>
-        <source id="audio-source" src="" type="audio/mpeg">
-    </audio>
-
-    <script>
-        // ==========================================
-        //  🛠️ CONFIGURACIÓN (EDITA AQUÍ) 🛠️
-        // ==========================================
+    <!-- SCRIPTS -->
+    <script type="module">
+        // -----------------------------------------------------------
+        // 1. CONFIGURACIÓN PERSONAL (FOTOS, NOMBRES, MÚSICA)
+        // -----------------------------------------------------------
         const config = {
-            // Fecha de Inicio: Año, Mes (Enero=0, Agosto=7), Día, Hora, Minutos
-            fechaInicio: new Date(2025, 7, 11, 18, 34), 
-            
-            nombres: {
-                el: "Ángel",
-                ella: "Dalia"
-            },
-
+            fechaInicio: new Date(2025, 7, 11, 18, 34), // Año, Mes(0-11), Día, Hora, Min
+            nombres: { el: "Ángel", ella: "Dalia" },
             fotos: {
-                // Foto grande de arriba
                 portada: "https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?q=80&w=800&auto=format&fit=crop",
-                
-                // Foto pequeña del reproductor de música
                 discoMusica: "https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=200&auto=format&fit=crop",
-                
-                // Las 3 fotos de la galería deslizable
                 galeria: [
                     "https://images.unsplash.com/photo-1616091093729-c046294eb82e?q=80&w=600&auto=format&fit=crop",
                     "https://images.unsplash.com/photo-1621621667797-e06afc217fb0?q=80&w=600&auto=format&fit=crop",
                     "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=600&auto=format&fit=crop"
                 ]
             },
-
-            // Enlace a tu canción (debe ser .mp3)
             musica: "cancion.mp3"
         };
-        // ==========================================
-        //  FIN DE LA CONFIGURACIÓN (NO TOCAR ABAJO)
-        // ==========================================
+
+        // -----------------------------------------------------------
+        // 2. CONFIGURACIÓN DE FIREBASE (¡AQUÍ PEGA TUS LLAVES!)
+        // -----------------------------------------------------------
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getFirestore, doc, onSnapshot, updateDoc, increment, setDoc, getDoc } 
+               from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            // --- BORRA ESTO Y PEGA TUS DATOS DE FIREBASE AQUÍ ---
+            apiKey: "TU_API_KEY_AQUI",
+            authDomain: "TU_PROYECTO.firebaseapp.com",
+            projectId: "TU_PROJECT_ID",
+            storageBucket: "TU_PROYECTO.appspot.com",
+            messagingSenderId: "NUMEROS",
+            appId: "TU_APP_ID"
+            // ----------------------------------------------------
+        };
+
+        // Inicializar Firebase solo si hay configuración
+        let db;
+        try {
+            const app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            console.log("Firebase inicializado correctamente");
+            document.getElementById('status-indicator').classList.remove('bg-red-500');
+            document.getElementById('status-indicator').classList.add('bg-green-500');
+        } catch (e) {
+            console.warn("Falta configurar Firebase. El juego no se sincronizará.", e);
+            alert("¡OJO! Te falta poner las llaves de Firebase en el código para que el juego se sincronice entre celulares.");
+        }
+
+        // --- LÓGICA DEL JUEGO ONLINE ---
+        const gameDocRef = db ? doc(db, "juego", "puntuacion") : null;
+
+        // Escuchar cambios en tiempo real
+        if (db) {
+            onSnapshot(gameDocRef, (docSnap) => {
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    updateGameUI(data.angel || 0, data.dalia || 0);
+                } else {
+                    // Si no existe el documento, lo creamos
+                    setDoc(gameDocRef, { angel: 0, dalia: 0 });
+                }
+            });
+        }
+
+        // Funciones para los botones (Globales para que el HTML las vea)
+        window.addPoint = async (person) => {
+            if (!db) return; // Si no hay firebase, no hace nada
+            
+            // Efecto visual inmediato (Confetti)
+            if (person === 'angel') {
+                confetti({ particleCount: 15, spread: 60, origin: { x: 0.2, y: 0.6 }, colors: ['#2563EB'] });
+            } else {
+                confetti({ particleCount: 15, spread: 60, origin: { x: 0.8, y: 0.6 }, colors: ['#EC4899'] });
+            }
+
+            // Actualizar en la nube (Base de Datos)
+            try {
+                await updateDoc(gameDocRef, {
+                    [person]: increment(1)
+                });
+            } catch (error) {
+                console.error("Error actualizando puntos:", error);
+            }
+        };
+
+        // Actualizar la Barra Visualmente
+        function updateGameUI(scoreAngel, scoreDalia) {
+            document.getElementById('score-angel').innerText = scoreAngel;
+            document.getElementById('score-dalia').innerText = scoreDalia;
+            
+            const total = scoreAngel + scoreDalia;
+            const loveBar = document.getElementById('love-bar');
+            
+            if (total === 0) {
+                loveBar.style.width = '50%';
+            } else {
+                const percentage = (scoreAngel / total) * 100;
+                loveBar.style.width = percentage + '%';
+            }
+        }
+        
+        // Asignar eventos a botones (necesario por ser module)
+        document.getElementById('btn-angel').onclick = () => window.addPoint('angel');
+        document.getElementById('btn-dalia').onclick = () => window.addPoint('dalia');
 
 
-        // --- CARGAR DATOS AL INICIAR ---
+        // -----------------------------------------------------------
+        // 3. CARGA DE RECURSOS Y CONTADORES (Igual que antes)
+        // -----------------------------------------------------------
         function cargarConfiguracion() {
-            // Cargar Fotos
             document.getElementById('img-portada').src = config.fotos.portada;
             document.getElementById('img-disco').src = config.fotos.discoMusica;
             document.getElementById('img-galeria-1').src = config.fotos.galeria[0];
             document.getElementById('img-galeria-2').src = config.fotos.galeria[1];
             document.getElementById('img-galeria-3').src = config.fotos.galeria[2];
-            
-            // Cargar Nombres en Juego
             document.getElementById('name-p1').innerText = config.nombres.el;
             document.getElementById('name-p2').innerText = config.nombres.ella;
-
-            // Cargar Música
             document.getElementById('audio-source').src = config.musica;
-            document.getElementById('audio').load(); // Recargar audio con nueva fuente
+            document.getElementById('audio').load();
         }
-        cargarConfiguracion(); // Ejecutar carga
+        cargarConfiguracion();
 
-
-        // --- LÓGICA DE TEXTO DE MESES (AUTOMÁTICA) ---
         function updateAnniversaryText() {
             const now = new Date();
             const startDate = config.fechaInicio;
-
-            // Calcular diferencia total en meses
             let months = (now.getFullYear() - startDate.getFullYear()) * 12 + (now.getMonth() - startDate.getMonth());
-            
-            // Si aún no es el día del mes, restar 1
-            if (now.getDate() < startDate.getDate()) {
-                months--;
-            }
-
-            const headerTitle = document.getElementById('header-title');
-            const letterTitle = document.getElementById('letter-title');
+            if (now.getDate() < startDate.getDate()) months--;
             
             let message = `Felices ${months} Meses`;
+            if (now.getDate() === startDate.getDate()) message = "¡Feliz Aniversario Amor!";
             
-            // Mensaje especial si es el día exacto
-            if (now.getDate() === startDate.getDate()) {
-                message = "¡Feliz Aniversario Amor!";
-            }
-
-            headerTitle.innerText = message;
-            letterTitle.innerText = `¡${message}!`;
+            document.getElementById('header-title').innerText = message;
+            document.getElementById('letter-title').innerText = `¡${message}!`;
         }
 
-        // --- CONTADORES ---
         function updateCounters() {
             const now = new Date();
             const startDate = config.fechaInicio;
             const diff = now - startDate;
-            
             if (diff < 0) return;
 
-            // Detallado
             let years = now.getFullYear() - startDate.getFullYear();
             let months = now.getMonth() - startDate.getMonth();
             let days = now.getDate() - startDate.getDate();
-
-            if (days < 0) {
-                months--;
-                days += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
-            }
-            if (months < 0) {
-                years--;
-                months += 12;
-            }
-            const weeks = Math.floor(days / 7);
-            const remainingDays = days % 7;
-
+            if (days < 0) { months--; days += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
+            if (months < 0) { years--; months += 12; }
+            
             document.getElementById('c-years').innerText = years;
             document.getElementById('c-months').innerText = months;
-            document.getElementById('c-weeks').innerText = weeks;
-            document.getElementById('c-days').innerText = remainingDays;
+            document.getElementById('c-weeks').innerText = Math.floor(days / 7);
+            document.getElementById('c-days').innerText = days % 7;
 
-            // Total Acumulado
             const totalSeconds = Math.floor(diff / 1000);
             const totalDays = Math.floor(totalSeconds / (3600 * 24));
             const dispHours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
@@ -345,46 +334,18 @@
             document.getElementById('t-seconds').innerText = dispSeconds < 10 ? '0'+dispSeconds : dispSeconds;
         }
 
-        // --- JUEGO ---
-        let scoreAngel = parseInt(localStorage.getItem('scoreAngel')) || 0;
-        let scoreDalia = parseInt(localStorage.getItem('scoreDalia')) || 0;
-        const uiAngel = document.getElementById('score-angel');
-        const uiDalia = document.getElementById('score-dalia');
-        const loveBar = document.getElementById('love-bar');
+        setInterval(updateCounters, 1000);
+        updateCounters();
+        updateAnniversaryText();
 
-        function updateGameUI() {
-            uiAngel.innerText = scoreAngel;
-            uiDalia.innerText = scoreDalia;
-            const total = scoreAngel + scoreDalia;
-            if (total === 0) {
-                loveBar.style.width = '50%';
-            } else {
-                const percentage = (scoreAngel / total) * 100;
-                loveBar.style.width = percentage + '%';
-            }
-        }
-
-        function addPoint(person) {
-            if (person === 'angel') {
-                scoreAngel++;
-                localStorage.setItem('scoreAngel', scoreAngel);
-                confetti({ particleCount: 15, spread: 60, origin: { x: 0.2, y: 0.6 }, colors: ['#2563EB'] });
-            } else {
-                scoreDalia++;
-                localStorage.setItem('scoreDalia', scoreDalia);
-                confetti({ particleCount: 15, spread: 60, origin: { x: 0.8, y: 0.6 }, colors: ['#EC4899'] });
-            }
-            updateGameUI();
-        }
-
-        // --- MÚSICA ---
+        // Control de Música
         const audio = document.getElementById('audio');
-        const disk = document.getElementById('img-disco'); // Usar ID correcto
+        const disk = document.getElementById('img-disco');
         const playIcon = document.getElementById('play-icon');
         const pauseIcon = document.getElementById('pause-icon');
         let isPlaying = false;
-
-        function toggleMusic() {
+        
+        window.toggleMusic = function() {
             if (isPlaying) {
                 audio.pause();
                 disk.classList.add('paused');
@@ -398,13 +359,6 @@
             }
             isPlaying = !isPlaying;
         }
-
-        // --- LOOP PRINCIPAL ---
-        setInterval(updateCounters, 1000);
-        updateCounters();
-        updateAnniversaryText();
-        updateGameUI();
-
     </script>
 </body>
 </html>
