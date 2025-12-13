@@ -2,239 +2,372 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Para Dalia ❤️</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Nota: El script de confetti ya no es necesario si quitamos el botón de sorpresa -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.6.0/confetti.browser.min.js"></script> -->
+    
+    <!-- Fuentes Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nunito:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Iconos Phosphor -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
     <style>
+        /* --- Estilos Globales y Animaciones --- */
         body {
             font-family: 'Nunito', sans-serif;
+            background-color: #ffe4e6;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
-        .font-handwriting {
-            font-family: 'Dancing Script', cursive;
+
+        .font-script {
+            font-family: 'Great Vibes', cursive;
         }
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
+
+        /* Fondo animado suave */
+        .bg-animated {
+            background: linear-gradient(-45deg, #fff0f5, #ffe4e6, #fce7f3, #fff1f2);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
         }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Efecto Vidrio (Glassmorphism) */
+        .glass {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        /* Animaciones */
+        .animate-float { animation: float 6s ease-in-out infinite; }
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
-        .heart-bg {
-            background-color: #fff0f3;
-            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z' fill='%23ffccd5' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
-        }
-        .animate-spin-slow {
-            animation: spin 8s linear infinite;
-        }
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+
+        /* Estilo para el disco de música */
+        .spin-slow { animation: spin 8s linear infinite; }
+        .paused { animation-play-state: paused; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* Click effect para el juego */
+        .click-bounce:active { transform: scale(0.95); }
     </style>
 </head>
-<body class="heart-bg text-gray-800 overflow-x-hidden">
+<body class="bg-animated text-gray-700 pb-32">
 
-    <div id="hearts-container" class="fixed inset-0 pointer-events-none z-0"></div>
+    <!-- Header con Foto Principal -->
+    <header class="relative h-[60vh] w-full overflow-hidden rounded-b-[40px] shadow-2xl">
+        <div class="absolute inset-0 bg-gradient-to-t from-rose-900/60 to-transparent z-10"></div>
+        
+        <!-- FOTO PRINCIPAL -->
+        <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?q=80&w=800&auto=format&fit=crop" 
+             class="w-full h-full object-cover" 
+             alt="Nosotros">
 
-    <main class="relative z-10 max-w-md mx-auto bg-white/90 backdrop-blur-sm min-h-screen shadow-2xl border-x border-pink-100">
+        <div class="absolute inset-0 z-20 flex flex-col justify-end items-center pb-12 text-white">
+            <h1 class="font-script text-7xl drop-shadow-lg mb-2 text-pink-200">Dalia</h1>
+            
+            <!-- Título Dinámico (Se actualiza solo) -->
+            <p id="header-title" class="uppercase tracking-[0.2em] text-sm font-bold bg-white/20 backdrop-blur-md px-6 py-2 rounded-full border border-white/30 shadow-lg animate-float">
+                Cargando tiempo...
+            </p>
+        </div>
+    </header>
 
-        <!-- Encabezado -->
-        <header class="relative h-96 overflow-hidden rounded-b-[3rem] shadow-lg">
-            <div class="absolute inset-0 bg-gradient-to-b from-pink-400 to-rose-500 opacity-90"></div>
-            <!-- Puedes cambiar esta imagen de fondo también -->
-            <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1000&auto=format&fit=crop" alt="Fondo romántico" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-50">
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-white text-center p-6">
-                <div class="animate-float mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white drop-shadow-lg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0z" />
-                    </svg>
+    <!-- Contenedor Principal -->
+    <main class="max-w-md mx-auto px-4 -mt-8 relative z-30 space-y-6">
+
+        <!-- SECCIÓN 1: CONTADOR DETALLADO (Glass Card) -->
+        <section class="glass rounded-3xl p-6 shadow-xl text-center animate-float" style="animation-delay: 1s;">
+            <h2 class="text-rose-500 font-bold text-sm tracking-widest uppercase mb-4 flex justify-center items-center gap-2">
+                <i class="ph-fill ph-heart text-xl"></i> Tiempo Exacto
+            </h2>
+            
+            <div class="grid grid-cols-4 gap-2 mb-4">
+                <div class="flex flex-col bg-white/50 rounded-xl p-2">
+                    <span id="c-years" class="text-xl font-black text-rose-600">0</span>
+                    <span class="text-[10px] text-gray-500 uppercase">Años</span>
                 </div>
-                <h1 class="font-handwriting text-6xl mb-2 drop-shadow-md">Dalia</h1>
-                <p class="text-xl tracking-widest uppercase font-semibold opacity-90">Felices 3 Meses</p>
-                <p class="text-sm mt-2 opacity-80">Desde el 11 de agosto, 6:34 PM</p>
+                <div class="flex flex-col bg-white/50 rounded-xl p-2">
+                    <span id="c-months" class="text-xl font-black text-rose-600">0</span>
+                    <span class="text-[10px] text-gray-500 uppercase">Meses</span>
+                </div>
+                <div class="flex flex-col bg-white/50 rounded-xl p-2">
+                    <span id="c-weeks" class="text-xl font-black text-rose-600">0</span>
+                    <span class="text-[10px] text-gray-500 uppercase">Sem.</span>
+                </div>
+                <div class="flex flex-col bg-white/50 rounded-xl p-2">
+                    <span id="c-days" class="text-xl font-black text-rose-600">0</span>
+                    <span class="text-[10px] text-gray-500 uppercase">Días</span>
+                </div>
             </div>
-        </header>
+        </section>
 
-        <!-- Sección del contador -->
-        <section class="px-6 py-10 -mt-10">
-            <div class="bg-white rounded-2xl shadow-xl p-6 border border-pink-100 text-center transform hover:scale-105 transition-transform duration-300">
-                <h2 class="text-rose-500 font-bold text-lg mb-4 uppercase tracking-wide">Tiempo Juntos</h2>
-                <div class="grid grid-cols-4 gap-2 text-center">
-                    <div class="bg-rose-50 rounded-lg p-2">
-                        <span id="days" class="block text-2xl font-bold text-rose-600">0</span>
-                        <span class="text-xs text-rose-400">Días</span>
-                    </div>
-                    <div class="bg-rose-50 rounded-lg p-2">
-                        <span id="hours" class="block text-2xl font-bold text-rose-600">0</span>
-                        <span class="text-xs text-rose-400">Horas</span>
-                    </div>
-                    <div class="bg-rose-50 rounded-lg p-2">
-                        <span id="minutes" class="block text-2xl font-bold text-rose-600">0</span>
-                        <span class="text-xs text-rose-400">Min</span>
-                    </div>
-                    <div class="bg-rose-50 rounded-lg p-2">
-                        <span id="seconds" class="block text-2xl font-bold text-rose-600">0</span>
-                        <span class="text-xs text-rose-400">Seg</span>
-                    </div>
+        <!-- SECCIÓN 2: CONTADOR ACUMULADO -->
+        <section class="bg-white rounded-3xl p-5 shadow-lg border border-pink-100">
+            <h3 class="text-center text-gray-400 text-xs uppercase font-bold mb-3">Contador Total Acumulado</h3>
+            <div class="grid grid-cols-4 gap-1 text-center divide-x divide-pink-100">
+                <div>
+                    <span id="t-days" class="block text-lg font-bold text-gray-700">0</span>
+                    <span class="text-[9px] text-rose-400">Días Totales</span>
                 </div>
-                <p class="mt-4 text-sm text-gray-500 italic">...y cada segundo cuenta.</p>
+                <div>
+                    <span id="t-hours" class="block text-lg font-bold text-gray-700">0</span>
+                    <span class="text-[9px] text-rose-400">Horas</span>
+                </div>
+                <div>
+                    <span id="t-minutes" class="block text-lg font-bold text-gray-700">0</span>
+                    <span class="text-[9px] text-rose-400">Minutos</span>
+                </div>
+                <div>
+                    <span id="t-seconds" class="block text-lg font-bold text-gray-700">0</span>
+                    <span class="text-[9px] text-rose-400">Segundos</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: MINI JUEGO "BATALLA DE AMOR" -->
+        <section class="relative overflow-hidden rounded-3xl shadow-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-white p-6">
+            <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+            
+            <h2 class="relative z-10 text-center font-script text-4xl mb-1">¿Quién ama más?</h2>
+            <p class="relative z-10 text-center text-xs opacity-90 mb-6">Toca tu botón (Los puntos se guardan)</p>
+
+            <div class="relative z-10 flex justify-between items-end gap-4">
+                <!-- ÁNGEL -->
+                <div class="flex flex-col items-center w-1/2">
+                    <div class="text-3xl font-black mb-2 drop-shadow-md" id="score-angel">0</div>
+                    <button onclick="addPoint('angel')" class="click-bounce w-full bg-blue-600 hover:bg-blue-500 border-b-4 border-blue-800 active:border-b-0 active:translate-y-1 text-white font-bold py-3 rounded-2xl shadow-lg transition-all flex flex-col items-center gap-1">
+                        <i class="ph-fill ph-boy text-2xl"></i>
+                        <span>Ángel</span>
+                    </button>
+                </div>
+                <!-- VS -->
+                <div class="mb-6 font-black text-2xl italic opacity-50">VS</div>
+                <!-- DALIA -->
+                <div class="flex flex-col items-center w-1/2">
+                    <div class="text-3xl font-black mb-2 drop-shadow-md" id="score-dalia">0</div>
+                    <button onclick="addPoint('dalia')" class="click-bounce w-full bg-pink-500 hover:bg-pink-400 border-b-4 border-pink-700 active:border-b-0 active:translate-y-1 text-white font-bold py-3 rounded-2xl shadow-lg transition-all flex flex-col items-center gap-1">
+                        <i class="ph-fill ph-girl text-2xl"></i>
+                        <span>Dalia</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Barra -->
+            <div class="mt-6 w-full h-3 bg-black/20 rounded-full overflow-hidden relative z-10">
+                <div id="love-bar" class="h-full bg-white transition-all duration-500" style="width: 50%"></div>
+            </div>
+        </section>
+
+        <!-- Galería Deslizable -->
+        <section class="pt-4">
+            <h2 class="font-script text-3xl text-rose-500 text-center mb-4">Nuestros Recuerdos</h2>
+            <div class="flex overflow-x-auto gap-4 pb-6 px-2 snap-x snap-mandatory" style="scrollbar-width: none;">
+                <div class="snap-center shrink-0 w-60 h-80 rounded-2xl overflow-hidden shadow-md relative">
+                    <img src="ANIMATION.gif" class="w-full h-full object-cover">
+                </div>
+                <div class="snap-center shrink-0 w-60 h-80 rounded-2xl overflow-hidden shadow-md relative">
+                    <img src="https://images.unsplash.com/photo-1621621667797-e06afc217fb0?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover">
+                </div>
+                <div class="snap-center shrink-0 w-60 h-80 rounded-2xl overflow-hidden shadow-md relative">
+                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover">
+                </div>
             </div>
         </section>
 
         <!-- Carta -->
-        <section class="px-8 py-6">
-            <h2 class="font-handwriting text-4xl text-center text-rose-500 mb-6">Mi Carta Para Ti</h2>
-            <div class="prose prose-rose mx-auto text-center leading-relaxed text-gray-600">
-                <p>Mi hermosa Dalia,</p>
-                <p>Hoy celebramos nuestros primeros 3 meses, pero siento que te conozco de toda la vida. Gracias por cada sonrisa, por cada momento compartido y por hacer mis días mucho más brillantes.</p>
-                <p>Eres lo mejor que me ha pasado este 2025. Te quiero con todo mi corazón y no puedo esperar a ver todo lo que el futuro tiene preparado para nosotros.</p>
-                <p class="mt-6 font-handwriting text-2xl text-rose-600">¡Te amo!</p>
+        <article class="glass p-6 rounded-2xl shadow-sm border border-rose-100 mb-10">
+            <div class="text-center">
+                <i class="ph-fill ph-envelope-open text-3xl text-rose-400 mb-2"></i>
+                <p class="text-gray-600 italic leading-relaxed text-sm">
+                    "Cada día que pasa mi contador suma segundos, pero mi corazón suma motivos para amarte. Eres lo mejor que me ha pasado."
+                </p>
+                <!-- Mensaje Dinámico de Carta -->
+                <p id="letter-title" class="font-script text-2xl text-rose-600 mt-4 font-bold">
+                    ¡Felices Meses!
+                </p>
+                <p class="text-sm text-gray-400 mt-2 text-right">- Ángel</p>
             </div>
-        </section>
-
-        <!-- Sección de Foto Única -->
-        <!-- Agregado padding-bottom (pb-32) para que no lo tape el reproductor -->
-        <section class="px-4 py-8 my-6 mx-4 pb-32"> 
-            <h2 class="font-handwriting text-4xl text-center text-rose-500 mb-6">Un Momento Especial</h2>
-            <div class="relative rounded-2xl overflow-hidden shadow-lg group">
-                <!-- 
-                  AQUÍ VA TU FOTO
-                  CAMBIA ESTA FOTO: Reemplaza la URL de placehold.co con la URL de tu foto
-                -->
-                <img src="ANIMATION.gif" alt="Momento Especial" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400/fecdd3/db2777?text=Error+Cargando'">
-                
-                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end justify-center pb-6">
-                    <span class="font-handwriting text-white text-3xl drop-shadow-lg">¡Tú y Yo!</span>
-                </div>
-            </div>
-        </section>
-
-        
-        <!-- Reproductor con botón Play/Pause -->
-        <div class="fixed bottom-4 left-4 right-4 bg-white/90 backdrop-blur-md p-3 rounded-2xl shadow-2xl border border-gray-100 flex items-center justify-between z-50">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 bg-rose-500 rounded-full flex items-center justify-center animate-spin-slow">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
-                    </svg>
-                </div>
-                <div>
-                    <!-- Puedes cambiar el título de la canción aquí -->
-                    <p class="text-xs font-bold text-gray-800">Me niegas</p>
-                    <p class="text-[10px] text-gray-500">Nuestra Canción ❤️</p>
-                </div>
-            </div>
-
-            <!-- Botón de play/pause -->
-            <button id="playBtn" onclick="toggleMusic()" class="bg-rose-500 hover:bg-rose-600 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-md">
-                <!-- El ícono se cambiará por JS -->
-                <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
-                </svg>
-                <svg id="pauseIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h1a1 1 0 001-1V8a1 1 0 00-1-1H8zm5 0a1 1 0 00-1 1v4a1 1 0 001 1h1a1 1 0 001-1V8a1 1 0 00-1-1h-1z" clip-rule="evenodd" />
-                </svg>
-            </button>
-        </div>
-
-        <!-- Audio -->
-        <audio id="loveSong" loop>
-            <!-- 
-              AQUÍ VA TU MÚSICA
-              REEMPLAZA ESTO con la URL de tu canción 
-            -->
-            <source src="cancion.mp3" type="audio/mpeg">
-            Tu navegador no soporta el audio en HTML5.
-        </audio>
+        </article>
 
     </main>
 
+    <!-- REPRODUCTOR -->
+    <div class="fixed bottom-4 left-4 right-4 z-50">
+        <div class="bg-white/90 backdrop-blur-md border border-pink-200 rounded-2xl p-3 shadow-2xl flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-rose-400 relative">
+                    <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=200&auto=format&fit=crop" 
+                         id="disk" 
+                         class="w-full h-full object-cover paused spin-slow">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-2 h-2 bg-white rounded-full"></div>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-xs font-bold text-gray-800">Nuestra Canción</p>
+                    <p class="text-[10px] text-rose-500">Play para escuchar ❤️</p>
+                </div>
+            </div>
+            <button onclick="toggleMusic()" class="w-10 h-10 bg-rose-500 rounded-full flex items-center justify-center text-white shadow-lg active:scale-90 transition-transform">
+                <i id="play-icon" class="ph-fill ph-play"></i>
+                <i id="pause-icon" class="ph-fill ph-pause hidden"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- AUDIO -->
+    <audio id="audio" loop>
+        <source src="cancion.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
-        // --- Configuración del Temporizador ---
-        const startDate = new Date('2025-08-11T18:34:00');
-        
-        function updateTimer() {
+        // --- CONFIGURACIÓN DE FECHA ---
+        // 11 Agosto 2025
+        const startDate = new Date(2025, 7, 11, 18, 34); 
+
+        // --- 1. LÓGICA DE TEXTO DINÁMICO (NUEVO) ---
+        function updateAnniversaryText() {
+            const now = new Date();
+            // Calcular diferencia total en meses
+            let months = (now.getFullYear() - startDate.getFullYear()) * 12 + (now.getMonth() - startDate.getMonth());
+            
+            // Si aún no hemos llegado al día del mes (11), restamos un mes
+            if (now.getDate() < startDate.getDate()) {
+                months--;
+            }
+
+            // Textos a mostrar
+            const headerTitle = document.getElementById('header-title');
+            const letterTitle = document.getElementById('letter-title');
+            
+            let message = `Felices ${months} Meses`;
+            
+            // Si es exactamente el día de aniversario (el 11 de cualquier mes)
+            if (now.getDate() === startDate.getDate()) {
+                message = "¡Feliz Aniversario Amor!";
+            }
+
+            headerTitle.innerText = message;
+            letterTitle.innerText = `¡${message}!`;
+        }
+
+        // --- 2. CONTADORES (EXISTENTE) ---
+        function updateCounters() {
             const now = new Date();
             const diff = now - startDate;
+            if (diff < 0) return;
 
-            if (diff < 0) return; // Si la fecha es futura
+            // Detallado
+            let years = now.getFullYear() - startDate.getFullYear();
+            let months = now.getMonth() - startDate.getMonth();
+            let days = now.getDate() - startDate.getDate();
 
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const minutes = Math.floor((diff / (1000 * 60)) % 60);
-            const seconds = Math.floor((diff / 1000) % 60);
-            
-            document.getElementById('days').innerText = days;
-            document.getElementById('hours').innerText = hours;
-            document.getElementById('minutes').innerText = minutes;
-            document.getElementById('seconds').innerText = seconds;
+            if (days < 0) {
+                months--;
+                days += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+            }
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+            const weeks = Math.floor(days / 7);
+            const remainingDays = days % 7;
+
+            document.getElementById('c-years').innerText = years;
+            document.getElementById('c-months').innerText = months;
+            document.getElementById('c-weeks').innerText = weeks;
+            document.getElementById('c-days').innerText = remainingDays;
+
+            // Total Acumulado
+            const totalSeconds = Math.floor(diff / 1000);
+            const totalDays = Math.floor(totalSeconds / (3600 * 24));
+            const dispHours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+            const dispMinutes = Math.floor((totalSeconds % 3600) / 60);
+            const dispSeconds = Math.floor(totalSeconds % 60);
+
+            document.getElementById('t-days').innerText = totalDays;
+            document.getElementById('t-hours').innerText = dispHours < 10 ? '0'+dispHours : dispHours;
+            document.getElementById('t-minutes').innerText = dispMinutes < 10 ? '0'+dispMinutes : dispMinutes;
+            document.getElementById('t-seconds').innerText = dispSeconds < 10 ? '0'+dispSeconds : dispSeconds;
         }
-        setInterval(updateTimer, 1000);
-        updateTimer(); // Llamada inicial
 
+        // --- 3. JUEGO ---
+        let scoreAngel = parseInt(localStorage.getItem('scoreAngel')) || 0;
+        let scoreDalia = parseInt(localStorage.getItem('scoreDalia')) || 0;
+        const uiAngel = document.getElementById('score-angel');
+        const uiDalia = document.getElementById('score-dalia');
+        const loveBar = document.getElementById('love-bar');
 
-        // --- Corazones Flotantes ---
-        function createFloatingHearts() {
-            const container = document.getElementById('hearts-container');
-            if (!container) return;
-            
-            const heartCount = 15;
-            for(let i = 0; i < heartCount; i++) {
-                const heart = document.createElement('div');
-                heart.innerHTML = '❤️';
-                heart.style.position = 'absolute';
-                heart.style.fontSize = Math.random() * 20 + 10 + 'px';
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.top = Math.random() * 100 + 'vh';
-                heart.style.opacity = Math.random() * 0.5;
-                heart.style.animation = `float ${Math.random() * 5 + 5}s ease-in-out infinite`;
-                heart.style.animationDelay = `${Math.random() * 5}s`;
-                container.appendChild(heart);
+        function updateGameUI() {
+            uiAngel.innerText = scoreAngel;
+            uiDalia.innerText = scoreDalia;
+            const total = scoreAngel + scoreDalia;
+            if (total === 0) {
+                loveBar.style.width = '50%';
+            } else {
+                const percentage = (scoreAngel / total) * 100;
+                loveBar.style.width = percentage + '%';
             }
         }
-        createFloatingHearts();
 
-        // --- Control del Audio ---
-        const song = document.getElementById('loveSong');
-        const playBtn = document.getElementById('playBtn');
-        const playIcon = document.getElementById('playIcon');
-        const pauseIcon = document.getElementById('pauseIcon');
+        function addPoint(person) {
+            if (person === 'angel') {
+                scoreAngel++;
+                localStorage.setItem('scoreAngel', scoreAngel);
+                confetti({ particleCount: 15, spread: 60, origin: { x: 0.2, y: 0.6 }, colors: ['#2563EB'] });
+            } else {
+                scoreDalia++;
+                localStorage.setItem('scoreDalia', scoreDalia);
+                confetti({ particleCount: 15, spread: 60, origin: { x: 0.8, y: 0.6 }, colors: ['#EC4899'] });
+            }
+            updateGameUI();
+        }
+
+        // --- 4. MÚSICA ---
+        const audio = document.getElementById('audio');
+        const disk = document.getElementById('disk');
+        const playIcon = document.getElementById('play-icon');
+        const pauseIcon = document.getElementById('pause-icon');
         let isPlaying = false;
 
         function toggleMusic() {
-            if (typeof song.play !== 'function') {
-                console.error('El elemento de audio no está listo.');
-                return;
-            }
-
-            if (!isPlaying) {
-                // Intenta reproducir
-                song.play().then(() => {
-                    // Éxito
-                    playIcon.classList.add('hidden');
-                    pauseIcon.classList.remove('hidden');
-                    isPlaying = true;
-                }).catch(error => {
-                    // Fallo (navegador bloquea autoplay)
-                    console.warn('La reproducción automática fue bloqueada. El usuario debe interactuar primero.');
-                });
-            } else {
-                // Pausa
-                song.pause();
+            if (isPlaying) {
+                audio.pause();
+                disk.classList.add('paused');
                 playIcon.classList.remove('hidden');
                 pauseIcon.classList.add('hidden');
-                isPlaying = false;
+            } else {
+                audio.play();
+                disk.classList.remove('paused');
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
             }
+            isPlaying = !isPlaying;
         }
 
-        // Intento de reproducir al cargar la página (puede ser bloqueado)
-        // Se recomienda que el usuario haga el primer clic
-        // toggleMusic(); 
+        // --- INICIALIZACIÓN ---
+        setInterval(updateCounters, 1000);
+        updateCounters();
+        updateAnniversaryText(); // Se llama una vez al cargar
+        updateGameUI();
 
     </script>
 </body>
 </html>
+
+
