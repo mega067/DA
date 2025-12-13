@@ -98,11 +98,11 @@
             
             <div class="relative z-10 flex justify-center items-center gap-2 mb-2">
                 <h2 class="text-center font-script text-4xl">Batalla de Amor</h2>
-                <!-- Indicador de estado -->
-                <div id="status-indicator" class="w-3 h-3 rounded-full bg-red-500 animate-pulse" title="Desconectado"></div>
+                <!-- Indicador de estado (Rojo desconectado / Verde conectado) -->
+                <div id="status-indicator" class="w-3 h-3 rounded-full bg-red-500 animate-pulse" title="Conectando..."></div>
             </div>
             
-            <p class="relative z-10 text-center text-xs opacity-90 mb-6">Toca tu botón (¡Ahora sí se sincroniza en ambos celulares!)</p>
+            <p class="relative z-10 text-center text-xs opacity-90 mb-6">Toca tu botón (Sincronizado Online)</p>
 
             <div class="relative z-10 flex justify-between items-end gap-4">
                 <!-- Ángel -->
@@ -169,13 +169,14 @@
 
     <!-- SCRIPTS -->
     <script type="module">
-        // -----------------------------------------------------------
-        // 1. CONFIGURACIÓN PERSONAL (FOTOS, NOMBRES, MÚSICA)
-        // -----------------------------------------------------------
+        // ==========================================
+        // 1. CONFIGURACIÓN PERSONAL (FOTOS, NOMBRES)
+        // ==========================================
         const config = {
             fechaInicio: new Date(2025, 7, 11, 18, 34), // Año, Mes(0-11), Día, Hora, Min
             nombres: { el: "Ángel", ella: "Dalia" },
             fotos: {
+                // Reemplaza estos enlaces por los tuyos si quieres
                 portada: "https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?q=80&w=800&auto=format&fit=crop",
                 discoMusica: "https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=200&auto=format&fit=crop",
                 galeria: [
@@ -187,35 +188,32 @@
             musica: "cancion.mp3"
         };
 
-        // -----------------------------------------------------------
-        // 2. CONFIGURACIÓN DE FIREBASE (¡AQUÍ PEGA TUS LLAVES!)
-        // -----------------------------------------------------------
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        // ==========================================
+        // 2. CONFIGURACIÓN DE FIREBASE (YA INTEGRADA)
+        // ==========================================
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, doc, onSnapshot, updateDoc, increment, setDoc, getDoc } 
-               from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+               from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+        // TUS LLAVES REALES (Copiadas del chat)
         const firebaseConfig = {
-            // --- BORRA ESTO Y PEGA TUS DATOS DE FIREBASE AQUÍ ---
-            apiKey: "TU_API_KEY_AQUI",
-            authDomain: "TU_PROYECTO.firebaseapp.com",
-            projectId: "TU_PROJECT_ID",
-            storageBucket: "TU_PROYECTO.appspot.com",
-            messagingSenderId: "NUMEROS",
-            appId: "TU_APP_ID"
-            // ----------------------------------------------------
+            apiKey: "AIzaSyB-nyTKc8WknFmcs6Qkt0x3ULXPgdNZbEs",
+            authDomain: "amordalia-75d86.firebaseapp.com",
+            projectId: "amordalia-75d86",
+            storageBucket: "amordalia-75d86.firebasestorage.app",
+            messagingSenderId: "528878355338",
+            appId: "1:528878355338:web:ad0c0278d02abdf52a7e73",
+            measurementId: "G-Y3S391C1X6"
         };
 
-        // Inicializar Firebase solo si hay configuración
+        // Inicializar Firebase
         let db;
         try {
             const app = initializeApp(firebaseConfig);
             db = getFirestore(app);
             console.log("Firebase inicializado correctamente");
-            document.getElementById('status-indicator').classList.remove('bg-red-500');
-            document.getElementById('status-indicator').classList.add('bg-green-500');
         } catch (e) {
-            console.warn("Falta configurar Firebase. El juego no se sincronizará.", e);
-            alert("¡OJO! Te falta poner las llaves de Firebase en el código para que el juego se sincronice entre celulares.");
+            console.error("Error iniciando Firebase:", e);
         }
 
         // --- LÓGICA DEL JUEGO ONLINE ---
@@ -225,37 +223,43 @@
         if (db) {
             onSnapshot(gameDocRef, (docSnap) => {
                 if (docSnap.exists()) {
+                    // Si la conexión es exitosa, ponemos el punto verde
+                    document.getElementById('status-indicator').classList.remove('bg-red-500');
+                    document.getElementById('status-indicator').classList.add('bg-green-500');
+                    
                     const data = docSnap.data();
                     updateGameUI(data.angel || 0, data.dalia || 0);
                 } else {
-                    // Si no existe el documento, lo creamos
+                    // Si es la primera vez que se usa la base de datos, creamos el contador en 0
                     setDoc(gameDocRef, { angel: 0, dalia: 0 });
                 }
+            }, (error) => {
+                console.error("Error de permisos:", error);
+                // Si da error, probablemente falta crear la base de datos en Modo Prueba
             });
         }
 
-        // Funciones para los botones (Globales para que el HTML las vea)
+        // Función para sumar puntos
         window.addPoint = async (person) => {
-            if (!db) return; // Si no hay firebase, no hace nada
+            if (!db) return;
             
-            // Efecto visual inmediato (Confetti)
+            // Efecto Confetti Inmediato
             if (person === 'angel') {
                 confetti({ particleCount: 15, spread: 60, origin: { x: 0.2, y: 0.6 }, colors: ['#2563EB'] });
             } else {
                 confetti({ particleCount: 15, spread: 60, origin: { x: 0.8, y: 0.6 }, colors: ['#EC4899'] });
             }
 
-            // Actualizar en la nube (Base de Datos)
+            // Enviar a la nube
             try {
                 await updateDoc(gameDocRef, {
                     [person]: increment(1)
                 });
             } catch (error) {
-                console.error("Error actualizando puntos:", error);
+                console.error("Error enviando punto:", error);
             }
         };
 
-        // Actualizar la Barra Visualmente
         function updateGameUI(scoreAngel, scoreDalia) {
             document.getElementById('score-angel').innerText = scoreAngel;
             document.getElementById('score-dalia').innerText = scoreDalia;
@@ -271,14 +275,14 @@
             }
         }
         
-        // Asignar eventos a botones (necesario por ser module)
+        // Asignar eventos de clic
         document.getElementById('btn-angel').onclick = () => window.addPoint('angel');
         document.getElementById('btn-dalia').onclick = () => window.addPoint('dalia');
 
 
-        // -----------------------------------------------------------
-        // 3. CARGA DE RECURSOS Y CONTADORES (Igual que antes)
-        // -----------------------------------------------------------
+        // ==========================================
+        // 3. CARGA DE FOTOS Y TEXTOS
+        // ==========================================
         function cargarConfiguracion() {
             document.getElementById('img-portada').src = config.fotos.portada;
             document.getElementById('img-disco').src = config.fotos.discoMusica;
