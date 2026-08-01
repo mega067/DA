@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Para Dalia ❤️</title>
+    <title>Memoria de Dalia</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,23 +13,21 @@
     
     <!-- Iconos Phosphor -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
-    <!-- Confetti -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
-        /* --- Estilos Globales --- */
+        /* --- Estilos Globales Modificados (Tonos Melancólicos) --- */
         body {
             font-family: 'Nunito', sans-serif;
-            background-color: #ffe4e6;
+            background-color: #111827; /* Gris muy oscuro */
+            color: #d1d5db;
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
         }
         .font-script { font-family: 'Great Vibes', cursive; }
         .bg-animated {
-            background: linear-gradient(-45deg, #fff0f5, #ffe4e6, #fce7f3, #fff1f2);
+            background: linear-gradient(-45deg, #1f2937, #111827, #374151, #030712);
             background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            animation: gradientBG 20s ease infinite;
         }
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
@@ -37,129 +35,141 @@
             100% { background-position: 0% 50%; }
         }
         .glass {
-            background: rgba(255, 255, 255, 0.65);
+            background: rgba(31, 41, 55, 0.65);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(75, 85, 99, 0.4);
         }
-        .animate-float { animation: float 6s ease-in-out infinite; }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        .spin-slow { animation: spin 8s linear infinite; }
+        .spin-slow { animation: spin 10s linear infinite; }
         .paused { animation-play-state: paused; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
-        .click-bounce:active { transform: scale(0.95); }
+        
+        /* Estilos para el chat tipo WhatsApp oscuro */
+        .chat-bubble-right {
+            background-color: #047857; /* Verde oscuro */
+            color: #ecfdf5;
+            border-radius: 1rem 1rem 0 1rem;
+        }
+        .chat-bubble-left {
+            background-color: #374151; /* Gris */
+            color: #f3f4f6;
+            border-radius: 1rem 1rem 1rem 0;
+        }
     </style>
 </head>
-<body class="bg-animated text-gray-700 pb-32">
+<body class="bg-animated pb-32">
 
-    <!-- Header -->
-    <header class="relative h-[60vh] w-full overflow-hidden rounded-b-[40px] shadow-2xl">
-        <div class="absolute inset-0 bg-gradient-to-t from-rose-900/60 to-transparent z-10"></div>
-        <img id="img-portada" src="" class="w-full h-full object-cover" alt="Nosotros">
+    <!-- Header Modificado -->
+    <header class="relative h-[50vh] w-full overflow-hidden rounded-b-[40px] shadow-2xl grayscale-[50%]">
+        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/80 to-transparent z-10"></div>
+        <img id="img-portada" src="" class="w-full h-full object-cover opacity-60" alt="Recuerdo">
         <div class="absolute inset-0 z-20 flex flex-col justify-end items-center pb-12 text-white">
-            <h1 class="font-script text-7xl drop-shadow-lg mb-2 text-pink-200">Dalia</h1>
-            <p id="header-title" class="uppercase tracking-[0.2em] text-sm font-bold bg-white/20 backdrop-blur-md px-6 py-2 rounded-full border border-white/30 shadow-lg animate-float">
-                Cargando...
+            <h1 class="font-script text-6xl drop-shadow-lg mb-2 text-gray-300">Nuestra Historia</h1>
+            <p class="uppercase tracking-[0.1em] text-xs font-bold bg-black/40 backdrop-blur-md px-6 py-2 rounded-full border border-gray-600 shadow-lg">
+                11 Agosto 2025 - 28 Julio 2026
             </p>
         </div>
     </header>
 
     <main class="max-w-md mx-auto px-4 -mt-8 relative z-30 space-y-6">
-        <!-- Contador Detallado -->
-        <section class="glass rounded-3xl p-6 shadow-xl text-center animate-float" style="animation-delay: 1s;">
-            <h2 class="text-rose-500 font-bold text-sm tracking-widest uppercase mb-4 flex justify-center items-center gap-2">
-                <i class="ph-fill ph-heart text-xl"></i> Tiempo Exacto
+        
+        <!-- El Relato (Narrador) -->
+        <section class="glass rounded-3xl p-6 shadow-xl border-l-4 border-rose-900">
+            <h2 class="text-rose-700 font-script text-3xl mb-4 text-center">El Desenlace</h2>
+            <p class="text-sm text-gray-300 leading-relaxed text-justify indent-4">
+                A pesar de que Ángel lo dio todo e intentó ofrecerle el mundo entero, no fue suficiente. Dalia, buscando su propia paz y cediendo a las presiones, decidió que sus caminos debían separarse, ofreciéndole únicamente su amistad como consuelo.
+            </p>
+            <p class="text-sm text-gray-300 leading-relaxed text-justify indent-4 mt-3">
+                Pero Ángel, amándola tan profunda y sinceramente, no sabía cómo ser solo un amigo para la mujer que amaba. Su corazón no podría soportar quedarse a un lado, viendo cómo Dalia seguía con su vida como si nada hubiera pasado. 
+            </p>
+            <p class="text-sm text-gray-300 leading-relaxed text-justify indent-4 mt-3">
+                El contador de su amor realmente se detuvo aquel 28 de julio, quedando dolorosamente cerca de los 365 días juntos. Pasaron los días en un silencio sepulcral; Ángel no podía siquiera entrar al sistema para apagar el reloj. El dolor era tan inmenso que el simple hecho de ver una foto de ella le destrozaba el alma, dejándolo solo con la desesperación y la incomprensión de no saber qué más pudo haber hecho.
+            </p>
+        </section>
+
+        <!-- Contador Detallado (CONGELADO) -->
+        <section class="glass rounded-3xl p-6 shadow-xl text-center">
+            <h2 class="text-gray-400 font-bold text-xs tracking-widest uppercase mb-4 flex justify-center items-center gap-2">
+                <i class="ph-fill ph-clock text-xl"></i> Tiempo Exacto Que Duró
             </h2>
             <div class="grid grid-cols-4 gap-2 mb-4">
-                <div class="flex flex-col bg-white/50 rounded-xl p-2"><span id="c-years" class="text-xl font-black text-rose-600">0</span><span class="text-[10px] text-gray-500 uppercase">Años</span></div>
-                <div class="flex flex-col bg-white/50 rounded-xl p-2"><span id="c-months" class="text-xl font-black text-rose-600">0</span><span class="text-[10px] text-gray-500 uppercase">Meses</span></div>
-                <div class="flex flex-col bg-white/50 rounded-xl p-2"><span id="c-weeks" class="text-xl font-black text-rose-600">0</span><span class="text-[10px] text-gray-500 uppercase">Sem.</span></div>
-                <div class="flex flex-col bg-white/50 rounded-xl p-2"><span id="c-days" class="text-xl font-black text-rose-600">0</span><span class="text-[10px] text-gray-500 uppercase">Días</span></div>
+                <div class="flex flex-col bg-gray-800/50 rounded-xl p-2"><span id="c-years" class="text-xl font-black text-rose-900">0</span><span class="text-[10px] text-gray-500 uppercase">Años</span></div>
+                <div class="flex flex-col bg-gray-800/50 rounded-xl p-2"><span id="c-months" class="text-xl font-black text-rose-900">0</span><span class="text-[10px] text-gray-500 uppercase">Meses</span></div>
+                <div class="flex flex-col bg-gray-800/50 rounded-xl p-2"><span id="c-weeks" class="text-xl font-black text-rose-900">0</span><span class="text-[10px] text-gray-500 uppercase">Sem.</span></div>
+                <div class="flex flex-col bg-gray-800/50 rounded-xl p-2"><span id="c-days" class="text-xl font-black text-rose-900">0</span><span class="text-[10px] text-gray-500 uppercase">Días</span></div>
             </div>
+            <p class="text-xs text-gray-500 italic mt-2">Detenido para siempre el 28/07/2026 (A punto de 1 año)</p>
         </section>
 
-        <!-- Contador Acumulado -->
-        <section class="bg-white rounded-3xl p-5 shadow-lg border border-pink-100">
-            <h3 class="text-center text-gray-400 text-xs uppercase font-bold mb-3">Contador Total Acumulado</h3>
-            <div class="grid grid-cols-4 gap-1 text-center divide-x divide-pink-100">
-                <div><span id="t-days" class="block text-lg font-bold text-gray-700">0</span><span class="text-[9px] text-rose-400">Días Totales</span></div>
-                <div><span id="t-hours" class="block text-lg font-bold text-gray-700">0</span><span class="text-[9px] text-rose-400">Horas</span></div>
-                <div><span id="t-minutes" class="block text-lg font-bold text-gray-700">0</span><span class="text-[9px] text-rose-400">Minutos</span></div>
-                <div><span id="t-seconds" class="block text-lg font-bold text-gray-700">0</span><span class="text-[9px] text-rose-400">Segundos</span></div>
-            </div>
-        </section>
-
-        <!-- Mini Juego ONLINE -->
-        <section class="relative overflow-hidden rounded-3xl shadow-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-white p-6">
-            <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+        <!-- Fragmentos del Chat -->
+        <section class="glass rounded-3xl p-6 shadow-xl">
+            <h2 class="text-center font-script text-3xl text-gray-400 mb-6">El Último Adiós</h2>
             
-            <div class="relative z-10 flex justify-center items-center gap-2 mb-2">
-                <h2 class="text-center font-script text-4xl">Batalla de Amor</h2>
-                <!-- Indicador de estado (Rojo desconectado / Verde conectado) -->
-                <div id="status-indicator" class="w-3 h-3 rounded-full bg-red-500 animate-pulse" title="Conectando..."></div>
-            </div>
-            
-            <p class="relative z-10 text-center text-xs opacity-90 mb-6">Toca tu botón (Sincronizado Online)</p>
+            <div class="space-y-4 text-xs font-sans">
+                <!-- Mensaje Dalia -->
+                <div class="flex justify-start">
+                    <div class="chat-bubble-left p-3 max-w-[85%] shadow-md">
+                        <p class="font-bold text-[10px] text-gray-400 mb-1">Dalia❤️</p>
+                        <p>Siento que esto ya no va a funcionar más. Yo no te quiero lastimar más...</p>
+                    </div>
+                </div>
 
-            <div class="relative z-10 flex justify-between items-end gap-4">
-                <!-- Ángel -->
-                <div class="flex flex-col items-center w-1/2">
-                    <div class="text-3xl font-black mb-2 drop-shadow-md" id="score-angel">0</div>
-                    <button id="btn-angel" class="click-bounce w-full bg-blue-600 hover:bg-blue-500 border-b-4 border-blue-800 active:border-b-0 active:translate-y-1 text-white font-bold py-3 rounded-2xl shadow-lg transition-all flex flex-col items-center gap-1">
-                        <i class="ph-fill ph-boy text-2xl"></i>
-                        <span id="name-p1">Ángel</span>
-                    </button>
+                <!-- Mensaje Angel -->
+                <div class="flex justify-end">
+                    <div class="chat-bubble-right p-3 max-w-[85%] shadow-md">
+                        <p class="font-bold text-[10px] text-green-300 mb-1">Ángel</p>
+                        <p>Solo quiero saber porque. Si yo no he hecho más que amarte</p>
+                    </div>
                 </div>
-                <div class="mb-6 font-black text-2xl italic opacity-50">VS</div>
-                <!-- Dalia -->
-                <div class="flex flex-col items-center w-1/2">
-                    <div class="text-3xl font-black mb-2 drop-shadow-md" id="score-dalia">0</div>
-                    <button id="btn-dalia" class="click-bounce w-full bg-pink-500 hover:bg-pink-400 border-b-4 border-pink-700 active:border-b-0 active:translate-y-1 text-white font-bold py-3 rounded-2xl shadow-lg transition-all flex flex-col items-center gap-1">
-                        <i class="ph-fill ph-girl text-2xl"></i>
-                        <span id="name-p2">Dalia</span>
-                    </button>
+
+                <!-- Mensaje Dalia -->
+                <div class="flex justify-start">
+                    <div class="chat-bubble-left p-3 max-w-[85%] shadow-md">
+                        <p class="font-bold text-[10px] text-gray-400 mb-1">Dalia❤️</p>
+                        <p>Simplemente siento que se volvió monótono... No puedo ofrecerte la relación que tú quieres. Podemos ser solo amigos.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="mt-6 w-full h-3 bg-black/20 rounded-full overflow-hidden relative z-10">
-                <div id="love-bar" class="h-full bg-white transition-all duration-500" style="width: 50%"></div>
+
+                <!-- Mensaje Angel -->
+                <div class="flex justify-end">
+                    <div class="chat-bubble-right p-3 max-w-[85%] shadow-md">
+                        <p class="font-bold text-[10px] text-green-300 mb-1">Ángel</p>
+                        <p>Amiga ? Yo te dije en ningún momento quise ser tu amigo... Yo te quiero pero tú no a mi.</p>
+                    </div>
+                </div>
+                
+                 <!-- Mensaje Angel (Final) -->
+                 <div class="flex justify-end">
+                    <div class="chat-bubble-right p-3 max-w-[85%] shadow-md">
+                        <p class="font-bold text-[10px] text-green-300 mb-1">Ángel</p>
+                        <p>No te preocupes no te culpes ni nada. Simplemente toca volver a hacer esa persona que era antes la cual todos odiaban.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Galería -->
+        <!-- Galería en Blanco y Negro -->
         <section class="pt-4">
-            <h2 class="font-script text-3xl text-rose-500 text-center mb-4">Nuestros Recuerdos</h2>
+            <h2 class="font-script text-3xl text-gray-500 text-center mb-4">Lo que quedó</h2>
             <div class="flex overflow-x-auto gap-4 pb-6 px-2 snap-x snap-mandatory" style="scrollbar-width: none;">
-                <div class="snap-center shrink-0 w-60 h-80 rounded-2xl overflow-hidden shadow-md relative"><img id="img-galeria-1" src="" class="w-full h-full object-cover"></div>
-                <div class="snap-center shrink-0 w-60 h-80 rounded-2xl overflow-hidden shadow-md relative"><img id="img-galeria-2" src="" class="w-full h-full object-cover"></div>
-                <div class="snap-center shrink-0 w-60 h-80 rounded-2xl overflow-hidden shadow-md relative"><img id="img-galeria-3" src="" class="w-full h-full object-cover"></div>
+                <div class="snap-center shrink-0 w-60 h-80 rounded-2xl overflow-hidden shadow-md relative grayscale"><img id="img-galeria-1" src="" class="w-full h-full object-cover opacity-50"></div>
+                <div class="snap-center shrink-0 w-60 h-80 rounded-2xl overflow-hidden shadow-md relative grayscale"><img id="img-galeria-2" src="" class="w-full h-full object-cover opacity-50"></div>
+                <div class="snap-center shrink-0 w-60 h-80 rounded-2xl overflow-hidden shadow-md relative grayscale"><img id="img-galeria-3" src="" class="w-full h-full object-cover opacity-50"></div>
             </div>
         </section>
-
-        <!-- Carta -->
-        <article class="glass p-6 rounded-2xl shadow-sm border border-rose-100 mb-10">
-            <div class="text-center">
-                <i class="ph-fill ph-envelope-open text-3xl text-rose-400 mb-2"></i>
-                <p class="text-gray-600 italic leading-relaxed text-sm">"Cada día que pasa mi contador suma segundos, pero mi corazón suma motivos para amarte. Eres lo mejor que me ha pasado."</p>
-                <p id="letter-title" class="font-script text-2xl text-rose-600 mt-4 font-bold">¡Felices Meses!</p>
-                <p class="text-sm text-gray-400 mt-2 text-right">- Ángel</p>
-            </div>
-        </article>
     </main>
 
     <!-- Reproductor -->
     <div class="fixed bottom-4 left-4 right-4 z-50">
-        <div class="bg-white/90 backdrop-blur-md border border-pink-200 rounded-2xl p-3 shadow-2xl flex items-center justify-between">
+        <div class="bg-gray-900/90 backdrop-blur-md border border-gray-700 rounded-2xl p-3 shadow-2xl flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-rose-400 relative">
+                <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-600 relative grayscale">
                     <img id="img-disco" src="" class="w-full h-full object-cover paused spin-slow">
-                    <div class="absolute inset-0 flex items-center justify-center"><div class="w-2 h-2 bg-white rounded-full"></div></div>
+                    <div class="absolute inset-0 flex items-center justify-center"><div class="w-2 h-2 bg-gray-900 rounded-full"></div></div>
                 </div>
-                <div><p class="text-xs font-bold text-gray-800">Un Nuevo Amor</p><p class="text-[10px] text-rose-500">Play para escuchar ❤️</p></div>
+                <div><p class="text-xs font-bold text-gray-300">Nuestra Canción</p><p class="text-[10px] text-gray-500">Silencio...</p></div>
             </div>
-            <button onclick="toggleMusic()" class="w-10 h-10 bg-rose-500 rounded-full flex items-center justify-center text-white shadow-lg active:scale-90 transition-transform">
+            <button onclick="toggleMusic()" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center text-gray-300 shadow-lg active:scale-90 transition-transform">
                 <i id="play-icon" class="ph-fill ph-play"></i>
                 <i id="pause-icon" class="ph-fill ph-pause hidden"></i>
             </button>
@@ -168,15 +178,14 @@
     <audio id="audio" loop><source id="audio-source" src="" type="audio/mpeg"></audio>
 
     <!-- SCRIPTS -->
-    <script type="module">
+    <script>
         // ==========================================
-        // 1. CONFIGURACIÓN PERSONAL (FOTOS, NOMBRES)
+        // 1. CONFIGURACIÓN (FECHAS FIJAS)
         // ==========================================
         const config = {
-            fechaInicio: new Date(2025, 7, 11, 18, 34), // Año, Mes(0-11), Día, Hora, Min
-            nombres: { el: "Ángel", ella: "Dalia" },
+            fechaInicio: new Date(2025, 7, 11, 18, 34), // 11 Agosto 2025 (Nota: en JS los meses son 0-11, así que 7 es Agosto)
+            fechaFin: new Date(2026, 6, 28, 23, 59),    // 28 Julio 2026 (6 es Julio)
             fotos: {
-                // Reemplaza estos enlaces por los tuyos si quieres
                 portada: "20251210_213856-COLLAGE.jpg",
                 discoMusica: "IMG_20251114_182815.jpg",
                 galeria: [
@@ -189,99 +198,7 @@
         };
 
         // ==========================================
-        // 2. CONFIGURACIÓN DE FIREBASE (YA INTEGRADA)
-        // ==========================================
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, doc, onSnapshot, updateDoc, increment, setDoc, getDoc } 
-               from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-        // TUS LLAVES REALES (Copiadas del chat)
-        const firebaseConfig = {
-            apiKey: "AIzaSyB-nyTKc8WknFmcs6Qkt0x3ULXPgdNZbEs",
-            authDomain: "amordalia-75d86.firebaseapp.com",
-            projectId: "amordalia-75d86",
-            storageBucket: "amordalia-75d86.firebasestorage.app",
-            messagingSenderId: "528878355338",
-            appId: "1:528878355338:web:ad0c0278d02abdf52a7e73",
-            measurementId: "G-Y3S391C1X6"
-        };
-
-        // Inicializar Firebase
-        let db;
-        try {
-            const app = initializeApp(firebaseConfig);
-            db = getFirestore(app);
-            console.log("Firebase inicializado correctamente");
-        } catch (e) {
-            console.error("Error iniciando Firebase:", e);
-        }
-
-        // --- LÓGICA DEL JUEGO ONLINE ---
-        const gameDocRef = db ? doc(db, "juego", "puntuacion") : null;
-
-        // Escuchar cambios en tiempo real
-        if (db) {
-            onSnapshot(gameDocRef, (docSnap) => {
-                if (docSnap.exists()) {
-                    // Si la conexión es exitosa, ponemos el punto verde
-                    document.getElementById('status-indicator').classList.remove('bg-red-500');
-                    document.getElementById('status-indicator').classList.add('bg-green-500');
-                    
-                    const data = docSnap.data();
-                    updateGameUI(data.angel || 0, data.dalia || 0);
-                } else {
-                    // Si es la primera vez que se usa la base de datos, creamos el contador en 0
-                    setDoc(gameDocRef, { angel: 0, dalia: 0 });
-                }
-            }, (error) => {
-                console.error("Error de permisos:", error);
-                // Si da error, probablemente falta crear la base de datos en Modo Prueba
-            });
-        }
-
-        // Función para sumar puntos
-        window.addPoint = async (person) => {
-            if (!db) return;
-            
-            // Efecto Confetti Inmediato
-            if (person === 'angel') {
-                confetti({ particleCount: 15, spread: 60, origin: { x: 0.2, y: 0.6 }, colors: ['#2563EB'] });
-            } else {
-                confetti({ particleCount: 15, spread: 60, origin: { x: 0.8, y: 0.6 }, colors: ['#EC4899'] });
-            }
-
-            // Enviar a la nube
-            try {
-                await updateDoc(gameDocRef, {
-                    [person]: increment(1)
-                });
-            } catch (error) {
-                console.error("Error enviando punto:", error);
-            }
-        };
-
-        function updateGameUI(scoreAngel, scoreDalia) {
-            document.getElementById('score-angel').innerText = scoreAngel;
-            document.getElementById('score-dalia').innerText = scoreDalia;
-            
-            const total = scoreAngel + scoreDalia;
-            const loveBar = document.getElementById('love-bar');
-            
-            if (total === 0) {
-                loveBar.style.width = '50%';
-            } else {
-                const percentage = (scoreAngel / total) * 100;
-                loveBar.style.width = percentage + '%';
-            }
-        }
-        
-        // Asignar eventos de clic
-        document.getElementById('btn-angel').onclick = () => window.addPoint('angel');
-        document.getElementById('btn-dalia').onclick = () => window.addPoint('dalia');
-
-
-        // ==========================================
-        // 3. CARGA DE FOTOS Y TEXTOS
+        // 2. CARGA DE FOTOS Y TEXTOS
         // ==========================================
         function cargarConfiguracion() {
             document.getElementById('img-portada').src = config.fotos.portada;
@@ -289,58 +206,41 @@
             document.getElementById('img-galeria-1').src = config.fotos.galeria[0];
             document.getElementById('img-galeria-2').src = config.fotos.galeria[1];
             document.getElementById('img-galeria-3').src = config.fotos.galeria[2];
-            document.getElementById('name-p1').innerText = config.nombres.el;
-            document.getElementById('name-p2').innerText = config.nombres.ella;
             document.getElementById('audio-source').src = config.musica;
             document.getElementById('audio').load();
         }
         cargarConfiguracion();
 
-        function updateAnniversaryText() {
-            const now = new Date();
-            const startDate = config.fechaInicio;
-            let months = (now.getFullYear() - startDate.getFullYear()) * 12 + (now.getMonth() - startDate.getMonth());
-            if (now.getDate() < startDate.getDate()) months--;
+        // ==========================================
+        // 3. CÁLCULO DEL CONTADOR (ESTÁTICO)
+        // ==========================================
+        function setContadorDetenido() {
+            const start = config.fechaInicio;
+            const end = config.fechaFin;
             
-            let message = `Felices ${months} Meses`;
-            if (now.getDate() === startDate.getDate()) message = "¡Feliz Aniversario Amor!";
+            let years = end.getFullYear() - start.getFullYear();
+            let months = end.getMonth() - start.getMonth();
+            let days = end.getDate() - start.getDate();
             
-            document.getElementById('header-title').innerText = message;
-            document.getElementById('letter-title').innerText = `¡${message}!`;
-        }
+            if (days < 0) {
+                months--;
+                // Días del mes anterior a la fecha de fin
+                const previousMonth = new Date(end.getFullYear(), end.getMonth(), 0);
+                days += previousMonth.getDate();
+            }
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
 
-        function updateCounters() {
-            const now = new Date();
-            const startDate = config.fechaInicio;
-            const diff = now - startDate;
-            if (diff < 0) return;
-
-            let years = now.getFullYear() - startDate.getFullYear();
-            let months = now.getMonth() - startDate.getMonth();
-            let days = now.getDate() - startDate.getDate();
-            if (days < 0) { months--; days += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
-            if (months < 0) { years--; months += 12; }
-            
             document.getElementById('c-years').innerText = years;
             document.getElementById('c-months').innerText = months;
             document.getElementById('c-weeks').innerText = Math.floor(days / 7);
             document.getElementById('c-days').innerText = days % 7;
-
-            const totalSeconds = Math.floor(diff / 1000);
-            const totalDays = Math.floor(totalSeconds / (3600 * 24));
-            const dispHours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
-            const dispMinutes = Math.floor((totalSeconds % 3600) / 60);
-            const dispSeconds = Math.floor(totalSeconds % 60);
-
-            document.getElementById('t-days').innerText = totalDays;
-            document.getElementById('t-hours').innerText = dispHours < 10 ? '0'+dispHours : dispHours;
-            document.getElementById('t-minutes').innerText = dispMinutes < 10 ? '0'+dispMinutes : dispMinutes;
-            document.getElementById('t-seconds').innerText = dispSeconds < 10 ? '0'+dispSeconds : dispSeconds;
         }
 
-        setInterval(updateCounters, 1000);
-        updateCounters();
-        updateAnniversaryText();
+        // Ejecutar el contador una sola vez para que quede congelado
+        setContadorDetenido();
 
         // Control de Música
         const audio = document.getElementById('audio');
@@ -366,5 +266,3 @@
     </script>
 </body>
 </html>
-
-
